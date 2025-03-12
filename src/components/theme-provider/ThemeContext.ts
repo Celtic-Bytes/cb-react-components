@@ -8,9 +8,13 @@ const defaultThemes: Theme[] = [darkDefaultTheme, lightDefaultTheme];
 export const ThemeContext = createContext<{
   theme: Theme;
   switchTheme: (index: number) => void;
-  addTheme: (newTheme: Theme) => void;
+  /** Add themes to pre-existing ones. */
+  addThemes: (newThemes: Theme[]) => void;
+  /** Delete previous themes Overrinding them by the new ones */
+  setThemes: (newThemes: Theme[]) => void;
 }>({
   theme: defaultThemes[0],
   switchTheme: () => {},
-  addTheme: () => {},
+  addThemes: () => {},
+  setThemes: () => {},
 });

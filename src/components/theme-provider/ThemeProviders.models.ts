@@ -1,7 +1,10 @@
-import { Variant } from '../button/Button.model';
-
 export interface Theme {
+  /**
+   * Unique key used by React in iterable lists.
+   */
   key: string;
+  name: string;
+  prefix?: string;
   type: 'dark' | 'light';
   config: ThemeConfig;
 }
@@ -11,17 +14,23 @@ export interface ThemeConfig {
   backgroundColor: string;
   button: ThemeButtonConfig;
   gray: string;
-  radius: string;
+  borderRadius: string;
   textColor: string;
+  variantDanger: string;
+  variantDefault: string;
+  variantPrimary: string;
+  variantSecondary: string;
+  variantSuccess: string;
+  variantWarning: string;
 }
 
 export interface ThemeButtonConfig {
-  [Variant.Danger]: string;
-  [Variant.Default]: string;
-  [Variant.Primary]: string;
-  [Variant.Secondary]: string;
-  [Variant.Success]: string;
-  [Variant.Warning]: string;
   cursor: string;
-  radius: string;
+  borderRadius: string;
+}
+
+export interface ThemeGeneratedCss {
+  prefix: string;
+  themeClassName: string;
+  css: string;
 }

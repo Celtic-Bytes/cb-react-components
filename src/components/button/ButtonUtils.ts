@@ -19,7 +19,7 @@ export const getButtonStylesConfig = ({
     ? config.backgroundColor
     : config.button[variant];
   let color = outlined ? config.button[variant] : config.textColor;
-  let borderRadius = config.button.radius;
+  let borderRadius = config.button.borderRadius;
   let borderColor = config.button[variant];
   let borderWidth = outlined ? '1px' : 0;
   let cursor = config.button.cursor;
@@ -27,7 +27,7 @@ export const getButtonStylesConfig = ({
   if (disabled) {
     backgroundColor = outlined ? config.backgroundColor : config.gray;
     color = outlined ? config.gray : config.textColor;
-    borderRadius = config.button.radius;
+    borderRadius = config.button.borderRadius;
     borderColor = config.gray;
     borderWidth = outlined ? '1px' : 0;
     cursor = 'not-allowed';
