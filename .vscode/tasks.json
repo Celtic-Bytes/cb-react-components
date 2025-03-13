@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "start-storybook",
+      "type": "npm",
+      "script": "storybook",
+      "detail": "storybook dev -p 6006",
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": ".*",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".*",
+            "endsPattern": ".*"
+          }
+        }
+      ]
+    }
+  ]
+}
