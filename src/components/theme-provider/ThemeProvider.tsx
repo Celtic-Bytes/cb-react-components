@@ -25,14 +25,13 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 }) => {
   const [cbThemes, setCbThemes] = useState<Theme[]>(themes);
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
-
   const currentTheme = cbThemes[currentThemeIndex];
 
   // Dynamically generate CSS and insert into the <head>
   useEffect(() => {
     const styleElement = document.createElement('style');
     const gStyles = generateCssForTheme(currentTheme);
-    styleElement.id = `${gStyles.prefix}-theme-styles`;
+    styleElement.id = `cb-theme-styles`;
     styleElement.innerHTML = gStyles.css;
 
     const existingStyleElement = document.getElementById('theme-styles');
@@ -47,36 +46,31 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
     };
   }, [currentTheme]);
 
-  const switchTheme = useCallback(
+  const switchThemeByIndex = useCallback(
     (index: number) => {
+      console.log('the index is ', index);
       if (index >= 0 && index < cbThemes.length) {
         setCurrentThemeIndex(index);
       }
     },
-    [cbThemes]
+    [cbThemes.length]
   );
-
-  const addThemes = useCallback((newThemes: Theme[]) => {
-    setCbThemes((prevThemes) => [...prevThemes, ...newThemes]);
-  }, []);
-
-  const setThemes = useCallback((newThemes: Theme[]) => {
-    setCbThemes(() => [...newThemes]);
-  }, []);
 
   const contextValue = useMemo(
     () => ({
-      theme: currentTheme,
-      switchTheme,
-      addThemes,
-      setThemes,
+      themes: cbThemes,
+      currentTheme,
+      currentThemeIndex,
+      switchThemeByIndex,
     }),
-    [addThemes, currentTheme, switchTheme, setThemes]
+    [cbThemes, currentTheme, currentThemeIndex, switchThemeByIndex]
   );
+
+  const { containerClassname, css } = generateCssForTheme(currentTheme);
 
   return (
     <ThemeContext.Provider value={contextValue}>
-      <div className={generateCssForTheme(currentTheme).themeClassName}>
+      <div id="cb-theme-container" className={containerClassname}>
         {children}
       </div>
     </ThemeContext.Provider>

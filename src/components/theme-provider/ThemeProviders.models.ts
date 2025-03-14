@@ -4,18 +4,21 @@ export interface Theme {
    */
   key: string;
   name: string;
-  prefix?: string;
   type: 'dark' | 'light';
   config: ThemeConfig;
 }
 
 export interface ThemeConfig {
+  button: ThemeButtonConfig;
+  theme: ThemeGlobalConfig;
+}
+
+export interface ThemeGlobalConfig {
   accentColor: string;
   backgroundColor: string;
-  button: ThemeButtonConfig;
+  borderRadius?: string;
   gray: string;
-  borderRadius: string;
-  textColor: string;
+  color: string;
   variantDanger: string;
   variantDefault: string;
   variantPrimary: string;
@@ -25,12 +28,11 @@ export interface ThemeConfig {
 }
 
 export interface ThemeButtonConfig {
-  cursor: string;
+  borderWidth: string;
   borderRadius: string;
 }
 
 export interface ThemeGeneratedCss {
-  prefix: string;
-  themeClassName: string;
+  containerClassname: string;
   css: string;
 }

@@ -1,7 +1,30 @@
 import { ButtonHTMLAttributes, FC, HTMLAttributes, RefAttributes } from 'react';
-import { useTheme } from '../theme-provider/useTheme';
-import { Variant } from './Button.model';
-import { getButtonStylesConfig } from './ButtonUtils';
+import { Variant } from '../../shared/models';
+
+interface GenerateClass {
+  disabled?: boolean;
+  variant?: Variant;
+  outlined?: boolean;
+}
+
+const generateClassName = ({
+  disabled,
+  variant,
+  outlined,
+}: GenerateClass): string => {
+  let classes = 'cb-button';
+
+  if (disabled || variant || outlined) {
+    const calculatedClass =
+      `${variant && !disabled ? variant : ''}` +
+      `${disabled ? 'disabled' : ''}` +
+      `${outlined && (disabled || variant) ? '-' : ''}` +
+      `${outlined ? 'outlined' : ''}`;
+    classes = classes + ` cb-button--${calculatedClass}`;
+  }
+
+  return classes;
+};
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
@@ -16,26 +39,26 @@ export const Button: FC<ButtonProps> = ({
   type = 'button',
   disabled = false,
   ref,
-  variant = Variant.Default,
+  variant,
   outlined = false,
   ...props
 }) => {
-  const { config } = useTheme().theme;
-
-  const defaultStyles: HTMLAttributes<HTMLButtonElement>['style'] =
-    getButtonStylesConfig({ config, variant, outlined, disabled });
-
   return (
     <button
+      value={'34'}
       {...props}
-      type={type}
-      disabled={disabled}
       aria-disabled={disabled}
-      style={{ ...defaultStyles, ...props.style }}
+      className={[
+        generateClassName({ disabled, outlined, variant }),
+        props.className ?? '',
+      ].join(' ')}
+      disabled={disabled}
       // onMouseDown={(e) => {
       //   e.currentTarget.style = { ...activeStyles, ...props.style };
       // }}
       ref={ref}
+      style={{ ...props.style }}
+      type={type}
     >
       {children}
     </button>
