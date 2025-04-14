@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { HTMLAttributes } from 'react';
-import { Variant } from '../../shared/shared.model';
+import { ExtendedVariants } from '../theme-provider/models/variants/ThemeVariants.model';
 import { ThemeProvider } from '../theme-provider/ThemeProvider';
 import { darkDefaultTheme } from '../theme-provider/Themes/Dark';
 import { lightDefaultTheme } from '../theme-provider/Themes/Light';
@@ -28,7 +28,7 @@ const meta: Meta<typeof Button> = {
     },
     variant: {
       control: 'select',
-      options: ['none', ...Object.values(Variant)],
+      options: Object.values(ExtendedVariants),
     },
     type: {
       control: 'select',

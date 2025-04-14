@@ -1,11 +1,11 @@
 import { ButtonHTMLAttributes, FC, HTMLAttributes, RefAttributes } from 'react';
-import { VariantExtended } from '../../shared/shared.model';
+import { ExtendedVariantTypeList } from '../theme-provider/models/variants/ThemeVariants.model';
 
 export type Appearance = 'regular' | 'outlined' | 'link';
 
 export interface GenerateClass {
   disabled?: boolean;
-  variant?: VariantExtended;
+  variant?: ExtendedVariantTypeList;
   appearance?: Appearance;
 }
 
@@ -52,7 +52,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   ref?: RefAttributes<HTMLButtonElement>['ref'];
   appearance?: Appearance;
   disabled?: boolean;
-  variant?: VariantExtended;
+  variant?: ExtendedVariantTypeList;
 }
 
 export const Button: FC<ButtonProps> = ({

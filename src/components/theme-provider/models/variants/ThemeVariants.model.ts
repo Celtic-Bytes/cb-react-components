@@ -1,41 +1,24 @@
-import { Variant } from '../../../../shared/shared.model';
+export const Variant = {
+  primary: 'primary',
+  secondary: 'secondary',
+  success: 'success',
+  danger: 'danger',
+  warning: 'warning',
+  info: 'info',
+} as const;
 
-/**
- * Define base variant using Variants enum.
- * @example
- * {
- *   primary: string;
- *   secondary: string;
- *   ...
- * }
- */
-type BaseVariants = {
-  [K in Variant]: string; // example: primary
+export type VariantType = {
+  [K in keyof typeof Variant]: string;
 };
 
 /**
- * Define hover variants using the enum and key remapping with template literals
- * @example
- * {
- * primaryHover: string,
- * secondaryHover: string
- * ...
- * }
+ *  'none' is added to have an option to reset when user want to remove the variant.
  */
+export const ExtendedVariants = {
+  ...Variant,
+  none: 'none',
+} as const;
 
-type HoverVariants = {
-  [K in Variant as `${K}Hover`]: string; // example: primaryHover
-};
-
-/**
- * Define variants using the Variant enum.
- * @example
- * {
- * primary: string;
- * primaryHover: string;
- * secondary: string;
- * secondaryHover: string;
- * ...
- * }
- */
-export type ThemeVariants = BaseVariants & HoverVariants;
+export type VariantTypeList = (typeof Variant)[keyof typeof Variant];
+export type ExtendedVariantTypeList =
+  (typeof ExtendedVariants)[keyof typeof ExtendedVariants];
