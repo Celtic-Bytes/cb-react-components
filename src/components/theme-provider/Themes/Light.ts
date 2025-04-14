@@ -1,9 +1,6 @@
-import { Theme } from '../ThemeProviders.models';
-
-const primaryColor = 'rgb(255, 152, 68)';
+import { Theme } from '../models/ThemeProviders.model';
 
 export const lightDefaultTheme: Theme = {
-  /** React will use this field in iterables to identify the theme */
   key: 'default-light-theme',
   name: 'Light theme',
   type: 'light',
@@ -12,18 +9,27 @@ export const lightDefaultTheme: Theme = {
       borderRadius: '0.3em',
       borderWidth: '0.1em',
     },
-    theme: {
-      accentColor: 'rgb(0, 255, 85)',
+    core: {
+      accentColor: 'rgb(255, 124, 31)',
+      accentColorHover: 'rgb(255, 146, 68)',
       backgroundColor: 'rgb(243, 243, 243)',
-      gray: 'rgb(201, 201, 201)',
       borderRadius: '0.3em',
       color: 'rgb(44, 44, 44)',
-      variantDanger: 'rgb(255, 108, 108)',
-      variantDefault: 'rgb(182, 182, 182)',
-      variantPrimary: primaryColor,
-      variantSecondary: 'rgb(255, 181, 121)',
-      variantSuccess: 'rgb(152, 255, 149)',
-      variantWarning: 'rgb(255, 209, 5)',
+      gray: 'rgb(108, 117, 125)',
+    },
+    variants: {
+      primary: 'rgb(96, 160, 255)',
+      primaryHover: 'rgb(139, 186, 255)',
+      secondary: 'rgb(192, 137, 255)',
+      secondaryHover: 'rgb(207, 166, 255)',
+      success: 'rgb(60, 199, 134)',
+      successHover: 'rgb(76, 221, 154)',
+      danger: 'rgb(240, 96, 111)',
+      dangerHover: 'rgb(241, 122, 134)',
+      warning: 'rgb(255, 163, 59)',
+      warningHover: 'rgb(255, 177, 87)',
+      info: 'rgb(255, 234, 41)', // Amber/Yellow
+      infoHover: 'rgb(255, 245, 158)',
     },
   },
 };

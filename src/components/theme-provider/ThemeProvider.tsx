@@ -6,9 +6,9 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { Theme } from './models/ThemeProviders.model';
 import { ThemeContext } from './ThemeContext';
 import { generateCssForTheme } from './ThemeCssGenerator';
-import { Theme } from './ThemeProviders.models';
 import { darkDefaultTheme } from './Themes/Dark';
 import { lightDefaultTheme } from './Themes/Light';
 

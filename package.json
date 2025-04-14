@@ -23,7 +23,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@celticbytes/cb-react-components": "file:"
+    "@celticbytes/cb-react-components": "file:",
+    "colorjs.io": "^0.5.2"
   },
   "peerDependencies": {
     "react": "19.0.0",

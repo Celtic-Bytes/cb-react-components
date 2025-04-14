@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { HTMLAttributes } from 'react';
-import { Variant } from '../../shared/models';
+import { Variant } from '../../shared/shared.model';
 import { ThemeProvider } from '../theme-provider/ThemeProvider';
 import { darkDefaultTheme } from '../theme-provider/Themes/Dark';
 import { lightDefaultTheme } from '../theme-provider/Themes/Light';
@@ -28,7 +28,11 @@ const meta: Meta<typeof Button> = {
     },
     variant: {
       control: 'select',
-      options: Object.values(Variant),
+      options: ['none', ...Object.values(Variant)],
+    },
+    type: {
+      control: 'select',
+      options: ['submit', 'reset', 'button'],
     },
   },
   parameters: {
@@ -42,6 +46,8 @@ const meta: Meta<typeof Button> = {
             {/* Move toggle button INSIDE provider's children */}
             <ThemeToggleButton />
             <div style={{ marginTop: '20px' }}>
+              <Story />
+              <div style={{ width: '5px', height: '5px' }}></div>
               <Story />
             </div>
           </div>
@@ -69,16 +75,12 @@ const ThemeToggleButton = () => {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-export const Darkbutton: Story = {
+export const ButtonExample: Story = {
   args: {
     children: 'My button',
     disabled: false,
-    outlined: false,
-  },
-};
-
-export const Lightbutton: Story = {
-  args: {
-    children: 'My button',
+    appearance: 'regular',
+    type: 'button',
+    variant: 'none',
   },
 };

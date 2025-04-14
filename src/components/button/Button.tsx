@@ -1,46 +1,67 @@
 import { ButtonHTMLAttributes, FC, HTMLAttributes, RefAttributes } from 'react';
-import { Variant } from '../../shared/models';
+import { VariantExtended } from '../../shared/shared.model';
 
-interface GenerateClass {
+export type Appearance = 'regular' | 'outlined' | 'link';
+
+export interface GenerateClass {
   disabled?: boolean;
-  variant?: Variant;
-  outlined?: boolean;
+  variant?: VariantExtended;
+  appearance?: Appearance;
 }
 
+/**
+ * Generate the classNames based on the @see {@link /src/components/theme-provider/css/button-css.ts}
+ */
 const generateClassName = ({
   disabled,
   variant,
-  outlined,
+  appearance,
 }: GenerateClass): string => {
-  let classes = 'cb-button';
+  const baseClass = 'cb-button';
 
-  if (disabled || variant || outlined) {
-    const calculatedClass =
-      `${variant && !disabled ? variant : ''}` +
-      `${disabled ? 'disabled' : ''}` +
-      `${outlined && (disabled || variant) ? '-' : ''}` +
-      `${outlined ? 'outlined' : ''}`;
-    classes = classes + ` cb-button--${calculatedClass}`;
-  }
+  const separator =
+    variant !== 'none' ||
+    disabled ||
+    appearance === 'outlined' ||
+    appearance === 'link'
+      ? '--'
+      : '';
+  const variantName = variant !== 'none' && !disabled ? variant : '';
+  const outlineSeparator =
+    variant !== 'none' &&
+    (appearance == 'outlined' || appearance === 'link') &&
+    !disabled
+      ? '-'
+      : '';
+  const outlineName =
+    appearance === 'outlined' || appearance === 'link' ? 'outlined' : '';
+  const disabledSeparator =
+    (appearance == 'outlined' || appearance === 'link') && disabled ? '-' : '';
+  const disabledName = disabled ? `disabled` : '';
 
-  return classes;
+  const calculatedClass = `${baseClass}${separator}${variantName}${outlineSeparator}${outlineName}${disabledSeparator}${disabledName}`;
+
+  // The link class always have to be applied after the outlined class.
+  const linkClass = appearance === 'link' ? ` cb-button--outlined-link` : '';
+
+  return [baseClass, calculatedClass, linkClass].join(' ');
 };
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
-  disabled?: boolean;
   ref?: RefAttributes<HTMLButtonElement>['ref'];
-  variant?: Variant;
-  outlined?: boolean;
+  appearance?: Appearance;
+  disabled?: boolean;
+  variant?: VariantExtended;
 }
 
 export const Button: FC<ButtonProps> = ({
   children,
   type = 'button',
-  disabled = false,
   ref,
-  variant,
-  outlined = false,
+  appearance = 'regular',
+  variant = 'none',
+  disabled = false,
   ...props
 }) => {
   return (
@@ -49,7 +70,7 @@ export const Button: FC<ButtonProps> = ({
       {...props}
       aria-disabled={disabled}
       className={[
-        generateClassName({ disabled, outlined, variant }),
+        generateClassName({ disabled, variant, appearance }),
         props.className ?? '',
       ].join(' ')}
       disabled={disabled}

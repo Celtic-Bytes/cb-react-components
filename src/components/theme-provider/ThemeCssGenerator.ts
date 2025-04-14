@@ -1,5 +1,5 @@
 import { getButtonCss } from './css/button-css';
-import { Theme, ThemeGeneratedCss } from './ThemeProviders.models';
+import { Theme, ThemeGeneratedCss } from './models/ThemeProviders.model';
 
 export const generateCssForTheme = (theme: Theme): ThemeGeneratedCss => {
   if (!theme) {
@@ -10,9 +10,9 @@ export const generateCssForTheme = (theme: Theme): ThemeGeneratedCss => {
   const css =
     `
     .${containerClassname}{
-        background-color: ${cf.theme.backgroundColor} ;
-        color: ${cf.theme.color} ;
-        border-radius: ${cf.theme.borderRadius} ;    
+        background-color: ${cf.core.backgroundColor} ;
+        color: ${cf.core.color} ;
+        border-radius: ${cf.core.borderRadius} ;    
     }
     ` + getButtonCss(theme);
 
