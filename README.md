@@ -1,3 +1,26 @@
+## Information
+
+Libraries to check how they work:
+Material UI:
+
+- https://mui.com/material-ui/all-components/
+- https://github.com/mui/material-ui
+
+Chakra UI:
+
+- https://v2.chakra-ui.com/docs/components
+- https://github.com/chakra-ui/chakra-ui
+
+Ant Design:
+
+- https://ant.design/components/overview
+- https://github.com/ant-design/ant-design
+
+React Bootstrap:
+
+- https://react-bootstrap.netlify.app/docs/components/accordion
+- https://github.com/react-bootstrap/react-bootstrap
+
 # Debug
 
 To debug youre components just add a breakpoint in youre component and run the preconfigured `launch.json` setting.

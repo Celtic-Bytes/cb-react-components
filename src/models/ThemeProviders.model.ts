@@ -1,6 +1,6 @@
-import { ThemeButtonConfig } from './button/ThemeButton.model';
-import { ThemeCoreConfig } from './core/ThemeCore.model';
-import { VariantType } from './variants/ThemeVariants.model';
+import { ThemeButtonConfig } from './button/Button.model';
+import { ThemeGlobalConfig } from './global/Global.model';
+import { VariantListType } from './variants/Variants.model';
 
 export interface Theme {
   /**
@@ -16,8 +16,8 @@ export type ThemeType = 'dark' | 'light';
 
 export interface ThemeConfig {
   button: ThemeButtonConfig;
-  core: ThemeCoreConfig;
-  variants: VariantType;
+  global: ThemeGlobalConfig;
+  variants: VariantListType;
 }
 
 export interface ThemeGeneratedCss {

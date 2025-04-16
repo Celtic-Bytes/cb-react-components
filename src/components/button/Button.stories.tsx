@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { HTMLAttributes } from 'react';
-import { ExtendedVariants } from '../theme-provider/models/variants/ThemeVariants.model';
+import { AppearanceList } from '../../models/button/Button.model';
+import { SizesList } from '../../models/global/Global.model';
+import { VariantsListExtended } from '../../models/variants/Variants.model';
+import { darkDefaultTheme } from '../../Themes/Dark';
+import { lightDefaultTheme } from '../../Themes/Light';
 import { ThemeProvider } from '../theme-provider/ThemeProvider';
-import { darkDefaultTheme } from '../theme-provider/Themes/Dark';
-import { lightDefaultTheme } from '../theme-provider/Themes/Light';
 import { useTheme } from '../theme-provider/useTheme';
 import { Button } from './Button';
 
@@ -15,6 +17,7 @@ const containerStyle: HTMLAttributes<HTMLDivElement>['style'] = {
   justifyContent: 'center',
   alignItems: 'center',
   flexDirection: 'column',
+  padding: '5px',
 };
 
 const meta: Meta<typeof Button> = {
@@ -26,13 +29,21 @@ const meta: Meta<typeof Button> = {
       control: 'boolean',
       defaultValue: false,
     },
+    appearance: {
+      control: 'select',
+      options: Object.values(AppearanceList),
+    },
     variant: {
       control: 'select',
-      options: Object.values(ExtendedVariants),
+      options: Object.values(VariantsListExtended),
     },
     type: {
       control: 'select',
       options: ['submit', 'reset', 'button'],
+    },
+    size: {
+      control: 'select',
+      options: Object.values(SizesList),
     },
   },
   parameters: {
@@ -79,8 +90,9 @@ export const ButtonExample: Story = {
   args: {
     children: 'My button',
     disabled: false,
-    appearance: 'regular',
+    appearance: AppearanceList.regular,
     type: 'button',
-    variant: 'none',
+    variant: VariantsListExtended.none,
+    size: SizesList.medium,
   },
 };

@@ -1,5 +1,5 @@
-import { getButtonCss } from './css/button-css';
-import { Theme, ThemeGeneratedCss } from './models/ThemeProviders.model';
+import { Theme, ThemeGeneratedCss } from '../../models/ThemeProviders.model';
+import { getButtonCss } from '../button/button-css';
 
 export const generateCssForTheme = (theme: Theme): ThemeGeneratedCss => {
   if (!theme) {
@@ -9,10 +9,26 @@ export const generateCssForTheme = (theme: Theme): ThemeGeneratedCss => {
   const containerClassname = 'cb-theme';
   const css =
     `
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {       
+       font-size: 1rem;
+    }
+
+    html, body {
+      line-height: 1.5;
+      margin:0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
     .${containerClassname}{
-        background-color: ${cf.core.backgroundColor} ;
-        color: ${cf.core.color} ;
-        border-radius: ${cf.core.borderRadius} ;    
+        background-color: ${cf.global.backgroundColor} ;
+        color: ${cf.global.color} ;
+        border-radius: ${cf.global.borderRadius} ;    
     }
     ` + getButtonCss(theme);
 

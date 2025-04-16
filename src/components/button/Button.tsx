@@ -1,50 +1,57 @@
 import { ButtonHTMLAttributes, FC, HTMLAttributes, RefAttributes } from 'react';
-import { ExtendedVariantTypeList } from '../theme-provider/models/variants/ThemeVariants.model';
+import { Appearance, AppearanceList } from '../../models/button/Button.model';
+import { Sizes, SizesList } from '../../models/global/Global.model';
+import {
+  ExtendedVariant,
+  VariantsListExtended,
+} from '../../models/variants/Variants.model';
 
-export type Appearance = 'regular' | 'outlined' | 'link';
-
+const baseClassName = 'cb-button';
 export interface GenerateClass {
   disabled?: boolean;
-  variant?: ExtendedVariantTypeList;
+  variant?: ExtendedVariant;
   appearance?: Appearance;
 }
 
-/**
- * Generate the classNames based on the @see {@link /src/components/theme-provider/css/button-css.ts}
- */
-const generateClassName = ({
+const generateRegularClassName = ({
   disabled,
   variant,
   appearance,
 }: GenerateClass): string => {
-  const baseClass = 'cb-button';
+  if (appearance !== AppearanceList.regular) return '';
+  if (variant === VariantsListExtended.none && !disabled) return '';
 
+  const variantName = variant !== VariantsListExtended.none ? variant : '';
+
+  return `${baseClassName}--${disabled ? 'disabled' : variantName}`;
+};
+
+const generateOutlinedClassName = ({
+  disabled,
+  variant,
+  appearance,
+}: GenerateClass): string => {
+  if (appearance === AppearanceList.regular) return '';
+
+  const variantName =
+    variant !== VariantsListExtended.none && !disabled ? variant : '';
   const separator =
-    variant !== 'none' ||
-    disabled ||
-    appearance === 'outlined' ||
-    appearance === 'link'
-      ? '--'
-      : '';
-  const variantName = variant !== 'none' && !disabled ? variant : '';
-  const outlineSeparator =
-    variant !== 'none' &&
-    (appearance == 'outlined' || appearance === 'link') &&
-    !disabled
-      ? '-'
-      : '';
-  const outlineName =
-    appearance === 'outlined' || appearance === 'link' ? 'outlined' : '';
-  const disabledSeparator =
-    (appearance == 'outlined' || appearance === 'link') && disabled ? '-' : '';
-  const disabledName = disabled ? `disabled` : '';
+    variant !== VariantsListExtended.none && !disabled ? '-' : '';
+  const disabledName = disabled ? '-disabled' : '';
 
-  const calculatedClass = `${baseClass}${separator}${variantName}${outlineSeparator}${outlineName}${disabledSeparator}${disabledName}`;
+  return `${baseClassName}--${variantName}${separator}${AppearanceList.outlined}${disabledName}`;
+};
 
-  // The link class always have to be applied after the outlined class.
-  const linkClass = appearance === 'link' ? ` cb-button--outlined-link` : '';
-
-  return [baseClass, calculatedClass, linkClass].join(' ');
+/**
+ * 'text' Classname always have to be after 'outlined' since the 'text' remove
+ * borders of the 'outlined' class.
+ */
+const generateTextClassName = ({
+  appearance,
+}: Partial<GenerateClass>): string => {
+  return appearance === AppearanceList.text
+    ? ` cb-button--${AppearanceList.outlined}-${AppearanceList.text}`
+    : '';
 };
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
@@ -52,31 +59,35 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   ref?: RefAttributes<HTMLButtonElement>['ref'];
   appearance?: Appearance;
   disabled?: boolean;
-  variant?: ExtendedVariantTypeList;
+  variant?: ExtendedVariant;
+  size: Sizes;
 }
 
 export const Button: FC<ButtonProps> = ({
   children,
   type = 'button',
   ref,
-  appearance = 'regular',
-  variant = 'none',
+  appearance = AppearanceList.regular,
+  variant = VariantsListExtended.none,
   disabled = false,
+  size = SizesList.medium,
   ...props
 }) => {
   return (
     <button
-      value={'34'}
       {...props}
       aria-disabled={disabled}
       className={[
-        generateClassName({ disabled, variant, appearance }),
+        baseClassName,
+        generateRegularClassName({ disabled, variant, appearance }),
+        generateOutlinedClassName({ disabled, variant, appearance }),
+        generateTextClassName({ disabled, variant, appearance }),
+        `cb-button--size-${size}`,
         props.className ?? '',
-      ].join(' ')}
+      ]
+        .filter(Boolean)
+        .join(' ')}
       disabled={disabled}
-      // onMouseDown={(e) => {
-      //   e.currentTarget.style = { ...activeStyles, ...props.style };
-      // }}
       ref={ref}
       style={{ ...props.style }}
       type={type}

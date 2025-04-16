@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { HTMLAttributes } from 'react';
+import { darkDefaultTheme } from '../../Themes/Dark';
+import { lightDefaultTheme } from '../../Themes/Light';
 import { Button } from '../button/Button';
 import { ThemeProvider } from './ThemeProvider';
-import { darkDefaultTheme } from './Themes/Dark';
-import { lightDefaultTheme } from './Themes/Light';
 
 const meta: Meta<typeof ThemeProvider> = {
   title: 'components/ThemeProvider',

@@ -9,7 +9,7 @@ export const lightDefaultTheme: Theme = {
       borderRadius: '0.3em',
       borderWidth: '0.1em',
     },
-    core: {
+    global: {
       accentColor: 'rgb(255, 124, 31)',
       backgroundColor: 'rgb(243, 243, 243)',
       borderRadius: '0.3em',

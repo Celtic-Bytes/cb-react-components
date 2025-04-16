@@ -6,11 +6,11 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { darkDefaultTheme } from '../../Themes/Dark';
+import { lightDefaultTheme } from '../../Themes/Light';
 import { Theme } from './models/ThemeProviders.model';
 import { ThemeContext } from './ThemeContext';
 import { generateCssForTheme } from './ThemeCssGenerator';
-import { darkDefaultTheme } from './Themes/Dark';
-import { lightDefaultTheme } from './Themes/Light';
 
 const defaultThemes: Theme[] = [darkDefaultTheme, lightDefaultTheme];
 

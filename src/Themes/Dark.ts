@@ -9,7 +9,7 @@ export const darkDefaultTheme: Theme = {
       borderRadius: '0.3em',
       borderWidth: '0.1em',
     },
-    core: {
+    global: {
       accentColor: 'rgb(212, 120, 0)',
       backgroundColor: 'rgb(53, 53, 53)',
       borderRadius: '0.3em',
