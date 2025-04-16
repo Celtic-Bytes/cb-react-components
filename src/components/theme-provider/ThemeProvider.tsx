@@ -6,9 +6,9 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { Theme } from '../../models/ThemeProviders.model';
 import { darkDefaultTheme } from '../../Themes/Dark';
 import { lightDefaultTheme } from '../../Themes/Light';
-import { Theme } from './models/ThemeProviders.model';
 import { ThemeContext } from './ThemeContext';
 import { generateCssForTheme } from './ThemeCssGenerator';
 
@@ -48,7 +48,6 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 
   const switchThemeByIndex = useCallback(
     (index: number) => {
-      console.log('the index is ', index);
       if (index >= 0 && index < cbThemes.length) {
         setCurrentThemeIndex(index);
       }

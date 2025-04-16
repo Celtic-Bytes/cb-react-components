@@ -4,7 +4,7 @@ Libraries to check how they work:
 Material UI:
 
 - https://mui.com/material-ui/all-components/
-- https://github.com/mui/material-ui
+- https://github.com/mui/material-ui/tree/master/packages/mui-material/src
 
 Chakra UI:
 

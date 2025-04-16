@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC, HTMLAttributes, RefAttributes } from 'react';
+import { ButtonHTMLAttributes, FC, HTMLAttributes, ReactNode } from 'react';
 import { Appearance, AppearanceList } from '../../models/button/Button.model';
 import { Sizes, SizesList } from '../../models/global/Global.model';
 import {
@@ -55,22 +55,28 @@ const generateTextClassName = ({
 };
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
-  ref?: RefAttributes<HTMLButtonElement>['ref'];
   appearance?: Appearance;
   disabled?: boolean;
+  iconBottom?: ReactNode;
+  iconLeft?: ReactNode;
+  iconRight?: ReactNode;
+  iconTop?: ReactNode;
+  size?: Sizes;
+  type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   variant?: ExtendedVariant;
-  size: Sizes;
 }
 
 export const Button: FC<ButtonProps> = ({
-  children,
-  type = 'button',
-  ref,
   appearance = AppearanceList.regular,
-  variant = VariantsListExtended.none,
+  children,
   disabled = false,
+  iconTop,
+  iconBottom,
+  iconLeft,
+  iconRight,
   size = SizesList.medium,
+  type = 'button',
+  variant = VariantsListExtended.none,
   ...props
 }) => {
   return (
@@ -88,11 +94,46 @@ export const Button: FC<ButtonProps> = ({
         .filter(Boolean)
         .join(' ')}
       disabled={disabled}
-      ref={ref}
       style={{ ...props.style }}
       type={type}
     >
-      {children}
+      <span
+        className={`cb-button__icon-top${
+          iconTop && (children || iconBottom)
+            ? ` cb-button__icon-mb-${size}`
+            : ''
+        }`}
+      >
+        {iconTop}
+      </span>
+      <span
+        className={`cb-button__icon-right${
+          iconRight && (children || iconLeft)
+            ? ` cb-button__icon-ml-${size}`
+            : ''
+        }`}
+      >
+        {iconRight}
+      </span>
+      <span
+        className={`cb-button__icon-bottom${
+          iconBottom && (children || iconTop)
+            ? ` cb-button__icon-mt-${size}`
+            : ''
+        }`}
+      >
+        {iconBottom}
+      </span>
+      <span
+        className={`cb-button__icon-left${
+          iconLeft && (children || iconRight)
+            ? ` cb-button__icon-mr-${size}`
+            : ''
+        }`}
+      >
+        {iconLeft}
+      </span>
+      <span className={`cb-button__content`}>{children}</span>
     </button>
   );
 };

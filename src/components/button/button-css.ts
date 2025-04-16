@@ -24,18 +24,50 @@ export const getButtonCss = (theme: Theme) => {
     return `color-mix( in oklab, ${color} 90%, ${invertedAdjustColor})`;
   };
 
+  const innerGap = '0.5em';
+
   return `
 
     /* BASE BUTTON CLASS */
 
     .cb-button{
+        align-items: center;
         background-color: ${cf.global.accentColor};
         border-radius: ${cf.button.borderRadius || 0};        
         border-width: ${cf.button.borderWidth || '0.1em'};
         border-color: transparent;        
         border-style: solid;
+        box-sizing: border-box;
         color: ${cf.global.color};
-        cursor: pointer;        
+        cursor: pointer;
+        display: inline-grid;
+        grid-template-areas:
+          'top top top'
+          'left content right'
+          'bottom bottom bottom';
+        grid-template-columns: auto minmax(0, 1fr) auto; 
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        justify-content: center;
+        overflow: hidden;
+        text-align: center;
+        text-overflow: ellipsis;
+        white-space: nowrap;   
+    }
+    
+    .cb-button__icon-top { grid-area: top; justify-self: center; }
+    .cb-button__icon-left { grid-area: left; }
+    .cb-button__content { grid-area: content; }
+    .cb-button__icon-right { grid-area: right; }
+    .cb-button__icon-bottom { grid-area: bottom; justify-self: center; }
+
+    .cb-button__icon-top,
+    .cb-button__icon-left,
+    /* .cb-button__content, */
+    .cb-button__icon-right,
+    .cb-button__icon-bottom {
+      display: flex; /* Helps center icon glyphs */
+      align-items: center;
+      justify-content: center;
     }
 
     .cb-button:hover{
@@ -212,12 +244,36 @@ export const getButtonCss = (theme: Theme) => {
     }
     .cb-button--size-${SizesList.large}{
         font-size: 1.125rem;
-        padding: 0.125rem 0.625rem;
+        padding: 0.125rem 0.5625rem;
     }
     .cb-button--size-${SizesList.extralarge}{
         font-size: 1.25rem;
-        padding: 0.25rem 1.25rem;
+        padding: 0.25rem 0.8125rem;
     }
+
+    .cb-button__icon-mr-${SizesList.extrasmall}{ margin-right: 1px; }
+    .cb-button__icon-mr-${SizesList.small}{ margin-right: 2px; }
+    .cb-button__icon-mr-${SizesList.medium}{ margin-right: 4px; }
+    .cb-button__icon-mr-${SizesList.large}{ margin-right: 6px; }
+    .cb-button__icon-mr-${SizesList.extralarge}{ margin-right: 8px; }
+
+    .cb-button__icon-ml-${SizesList.extrasmall}{ margin-left: 1px; }
+    .cb-button__icon-ml-${SizesList.small}{ margin-left: 2px; }
+    .cb-button__icon-ml-${SizesList.medium}{ margin-left: 4px; }
+    .cb-button__icon-ml-${SizesList.large}{ margin-left: 6px; }
+    .cb-button__icon-ml-${SizesList.extralarge}{ margin-left: 8px; }
+
+    .cb-button__icon-mt-${SizesList.extrasmall}{ margin-top: 1px; }
+    .cb-button__icon-mt-${SizesList.small}{ margin-top: 2px; }
+    .cb-button__icon-mt-${SizesList.medium}{ margin-top: 4px; }
+    .cb-button__icon-mt-${SizesList.large}{ margin-top: 6px; }
+    .cb-button__icon-mt-${SizesList.extralarge}{ margin-top: 8px; }
+
+    .cb-button__icon-mb-${SizesList.extrasmall}{ margin-bottom: 1px; }
+    .cb-button__icon-mb-${SizesList.small}{ margin-bottom: 2px; }
+    .cb-button__icon-mb-${SizesList.medium}{ margin-bottom: 4px; }
+    .cb-button__icon-mb-${SizesList.large}{ margin-bottom: 6px; }
+    .cb-button__icon-mb-${SizesList.extralarge}{ margin-bottom: 8px; }
 
     `;
 };
