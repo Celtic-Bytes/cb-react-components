@@ -21,6 +21,11 @@ React Bootstrap:
 - https://react-bootstrap.netlify.app/docs/components/accordion
 - https://github.com/react-bootstrap/react-bootstrap
 
+Prime React:
+
+- https://primereact.org/
+- https://github.com/primefaces/primereact/tree/master/components/lib
+
 # Debug
 
 To debug youre components just add a breakpoint in youre component and run the preconfigured `launch.json` setting.

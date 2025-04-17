@@ -9,6 +9,8 @@ export interface ThemeGlobalConfig {
   gray: string;
 }
 
+// ---------- SIZES----------------------
+
 export const SizesList = {
   extrasmall: 'extrasmall',
   small: 'small',
@@ -22,3 +24,22 @@ export type SizesListType = {
 };
 
 export type Sizes = (typeof SizesList)[keyof typeof SizesList];
+
+// ---------- VARIANTS----------------------
+
+export const VariantList = {
+  danger: 'danger',
+  info: 'info',
+  primary: 'primary',
+  /** In some cases, used as a reset option */
+  default: 'default',
+  secondary: 'secondary',
+  success: 'success',
+  warning: 'warning',
+} as const;
+
+export type VariantListType = {
+  [K in keyof typeof VariantList]: string;
+};
+
+export type Variant = (typeof VariantList)[keyof typeof VariantList];

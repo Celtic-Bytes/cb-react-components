@@ -1,9 +1,8 @@
-import { AppearanceList } from '../../models/button/Button.model';
-import { SizesList } from '../../models/global/Global.model';
-import { Theme } from '../../models/ThemeProviders.model';
-import { VariantList } from '../../models/variants/Variants.model';
+import { Theme } from '@src/main';
+import { AppearanceList } from '@src/models/button/Button.model';
+import { SizesList, VariantList } from '@src/models/global/Global.model';
 
-export const getButtonCss = (theme: Theme) => {
+export const getButtonCss = (theme: Theme): string => {
   const cf = theme.config;
 
   const adjustColor = theme.type === 'dark' ? 'black' : 'white';
@@ -23,8 +22,6 @@ export const getButtonCss = (theme: Theme) => {
   const cmoh = (color: string): string => {
     return `color-mix( in oklab, ${color} 90%, ${invertedAdjustColor})`;
   };
-
-  const innerGap = '0.5em';
 
   return `
 

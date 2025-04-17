@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { HTMLAttributes, SVGProps, useState } from 'react';
 import { AppearanceList } from '../../models/button/Button.model';
-import { SizesList } from '../../models/global/Global.model';
-import { VariantsListExtended } from '../../models/variants/Variants.model';
+import { SizesList, VariantList } from '../../models/global/Global.model';
 import { darkDefaultTheme } from '../../Themes/Dark';
 import { lightDefaultTheme } from '../../Themes/Light';
 import { ThemeProvider } from '../theme-provider/ThemeProvider';
@@ -98,7 +97,7 @@ const meta: Meta<typeof Button> = {
     },
     variant: {
       control: 'select',
-      options: Object.values(VariantsListExtended),
+      options: Object.values(VariantList),
     },
     type: {
       control: 'select',
@@ -189,7 +188,7 @@ export const ButtonExample: Story = {
     disabled: false,
     appearance: AppearanceList.regular,
     type: 'button',
-    variant: VariantsListExtended.none,
+    variant: VariantList.default,
     size: SizesList.medium,
   },
 };

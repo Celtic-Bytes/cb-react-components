@@ -1,15 +1,17 @@
 import { ButtonHTMLAttributes, FC, HTMLAttributes, ReactNode } from 'react';
-import { Appearance, AppearanceList } from '../../models/button/Button.model';
-import { Sizes, SizesList } from '../../models/global/Global.model';
+
+import { Appearance, AppearanceList } from '@src/models/button/Button.model';
 import {
-  ExtendedVariant,
-  VariantsListExtended,
-} from '../../models/variants/Variants.model';
+  Sizes,
+  SizesList,
+  Variant,
+  VariantList,
+} from '@src/models/global/Global.model';
 
 const baseClassName = 'cb-button';
 export interface GenerateClass {
   disabled?: boolean;
-  variant?: ExtendedVariant;
+  variant?: Variant;
   appearance?: Appearance;
 }
 
@@ -19,9 +21,9 @@ const generateRegularClassName = ({
   appearance,
 }: GenerateClass): string => {
   if (appearance !== AppearanceList.regular) return '';
-  if (variant === VariantsListExtended.none && !disabled) return '';
+  if (variant === VariantList.default && !disabled) return '';
 
-  const variantName = variant !== VariantsListExtended.none ? variant : '';
+  const variantName = variant !== VariantList.default ? variant : '';
 
   return `${baseClassName}--${disabled ? 'disabled' : variantName}`;
 };
@@ -34,9 +36,8 @@ const generateOutlinedClassName = ({
   if (appearance === AppearanceList.regular) return '';
 
   const variantName =
-    variant !== VariantsListExtended.none && !disabled ? variant : '';
-  const separator =
-    variant !== VariantsListExtended.none && !disabled ? '-' : '';
+    variant !== VariantList.default && !disabled ? variant : '';
+  const separator = variant !== VariantList.default && !disabled ? '-' : '';
   const disabledName = disabled ? '-disabled' : '';
 
   return `${baseClassName}--${variantName}${separator}${AppearanceList.outlined}${disabledName}`;
@@ -63,7 +64,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   iconTop?: ReactNode;
   size?: Sizes;
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
-  variant?: ExtendedVariant;
+  variant?: Variant;
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -76,7 +77,7 @@ export const Button: FC<ButtonProps> = ({
   iconRight,
   size = SizesList.medium,
   type = 'button',
-  variant = VariantsListExtended.none,
+  variant = VariantList.default,
   ...props
 }) => {
   return (
