@@ -3,7 +3,9 @@ import {
   ReactNode,
   useCallback,
   useEffect,
+  useId,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { Theme } from '../../models/ThemeProviders.model';
@@ -15,17 +17,21 @@ import { generateCssForTheme } from './ThemeCssGenerator';
 const defaultThemes: Theme[] = [darkDefaultTheme, lightDefaultTheme];
 
 export interface ThemeProviderProps {
+  id?: string;
   children: ReactNode;
   themes?: Theme[];
 }
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({
+  id,
   children,
   themes = defaultThemes,
 }) => {
   const [cbThemes, setCbThemes] = useState<Theme[]>(themes);
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
   const currentTheme = cbThemes[currentThemeIndex];
+
+  const generatedId = useRef(`cb-theme-provider-${useId()}`);
 
   // Dynamically generate CSS and insert into the <head>
   useEffect(() => {
@@ -69,7 +75,10 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 
   return (
     <ThemeContext.Provider value={contextValue}>
-      <div id="cb-theme-container" className={containerClassname}>
+      <div
+        id={id ?? generatedId.current}
+        className={containerClassname}
+      >
         {children}
       </div>
     </ThemeContext.Provider>

@@ -9,6 +9,41 @@ export interface ThemeGlobalConfig {
   gray: string;
 }
 
+// ------------------- BACKGROUND VARIANT -----------------------
+
+export const BackgroundVariantList = {
+  solid: 'solid',
+  translucent: 'translucent',
+  transparent: 'transparent',
+} as const;
+
+export type BackgroundVariantListType = {
+  [K in keyof typeof BackgroundVariantList]: string;
+};
+
+export type BackgroundVariant =
+  (typeof BackgroundVariantList)[keyof typeof BackgroundVariantList];
+
+// ------------------- POSITION------------------------------
+
+export const PositionsList = {
+  topStart: 'top-start',
+  topCenter: 'top-center',
+  topEnd: 'top-end',
+  middleStart: 'middle-start',
+  middleCenter: 'middle-center',
+  middleEnd: 'middle-end',
+  bottomStart: 'bottom-start',
+  bottomCenter: 'bottom-center',
+  bottomEnd: 'bottom-end',
+} as const;
+
+export type PositionListType = {
+  [K in keyof typeof PositionsList]: string;
+};
+
+export type Position = (typeof PositionsList)[keyof typeof PositionsList];
+
 // ---------- SIZES----------------------
 
 export const SizesList = {

@@ -1,4 +1,11 @@
-import { ButtonHTMLAttributes, FC, HTMLAttributes, ReactNode } from 'react';
+import {
+  ButtonHTMLAttributes,
+  FC,
+  HTMLAttributes,
+  ReactNode,
+  useId,
+  useRef,
+} from 'react';
 
 import { Appearance, AppearanceList } from '@src/models/button/Button.model';
 import {
@@ -9,7 +16,7 @@ import {
 } from '@src/models/global/Global.model';
 
 const baseClassName = 'cb-button';
-export interface GenerateClass {
+interface GenerateClass {
   disabled?: boolean;
   variant?: Variant;
   appearance?: Appearance;
@@ -62,6 +69,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
   iconTop?: ReactNode;
+  id?: string;
   size?: Sizes;
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   variant?: Variant;
@@ -75,14 +83,18 @@ export const Button: FC<ButtonProps> = ({
   iconBottom,
   iconLeft,
   iconRight,
+  id,
   size = SizesList.medium,
   type = 'button',
   variant = VariantList.default,
   ...props
 }) => {
+  const generatedId = useRef(`cb-button-${useId()}`);
+
   return (
     <button
       {...props}
+      id={id ?? generatedId.current}
       aria-disabled={disabled}
       className={[
         baseClassName,
@@ -90,12 +102,11 @@ export const Button: FC<ButtonProps> = ({
         generateOutlinedClassName({ disabled, variant, appearance }),
         generateTextClassName({ disabled, variant, appearance }),
         `cb-button--size-${size}`,
-        props.className ?? '',
+        props.className,
       ]
         .filter(Boolean)
         .join(' ')}
       disabled={disabled}
-      style={{ ...props.style }}
       type={type}
     >
       <span

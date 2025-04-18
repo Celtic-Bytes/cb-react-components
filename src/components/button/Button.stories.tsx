@@ -1,61 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { HTMLAttributes, SVGProps, useState } from 'react';
+import { StarIcon } from '@src/icons/icons';
+import { StoryContainer } from '@src/stories/components/StoryContainer';
+import { StoryToolsContainer } from '@src/stories/components/StoryToolsContainer';
+import { useState } from 'react';
 import { AppearanceList } from '../../models/button/Button.model';
 import { SizesList, VariantList } from '../../models/global/Global.model';
-import { darkDefaultTheme } from '../../Themes/Dark';
-import { lightDefaultTheme } from '../../Themes/Light';
-import { ThemeProvider } from '../theme-provider/ThemeProvider';
-import { useTheme } from '../theme-provider/useTheme';
 import { Button } from './Button';
-
-const containerStyle: HTMLAttributes<HTMLDivElement>['style'] = {
-  minWidth: '600px',
-  minHeight: '100px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'column',
-  padding: '5px',
-};
-
-const toolsStyle: HTMLAttributes<HTMLDivElement>['style'] = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'row',
-  gap: '0.7rem',
-};
-
-const StarIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
-    fill="currentColor"
-    viewBox="0 0 16 16"
-    aria-hidden="true"
-    focusable="false"
-    {...props}
-  >
-    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-  </svg>
-);
-
-const ThemeToggleButton = () => {
-  const { switchThemeByIndex, currentThemeIndex } = useTheme();
-
-  const toggleTheme = () => {
-    const newIndex = currentThemeIndex === 0 ? 1 : 0;
-    switchThemeByIndex(newIndex);
-  };
-
-  return (
-    <button onClick={toggleTheme}>
-      {currentThemeIndex === 0 ? 'Switch to Light' : 'Switch to Dark'}
-    </button>
-  );
-};
 
 const Checkbox = ({
   text,
@@ -76,9 +27,62 @@ const Checkbox = ({
   };
   return (
     <div>
-      <input type="checkbox" checked={isChecked} onChange={handleChange} />
+      <input
+        type='checkbox'
+        checked={isChecked}
+        onChange={handleChange}
+      />
       <label htmlFor={id}>{text}</label> {/* Display the text */}
     </div>
+  );
+};
+
+const CheckboxList = ({
+  setToggleTopIcon,
+  setToggleRightIcon,
+  setToggleBottomIcon,
+  setToggleLeftIcon,
+}: {
+  setToggleTopIcon: (e: boolean) => void;
+  setToggleRightIcon: (e: boolean) => void;
+  setToggleBottomIcon: (e: boolean) => void;
+  setToggleLeftIcon: (e: boolean) => void;
+}) => {
+  return (
+    <>
+      <Checkbox
+        text='top icon'
+        checked={false}
+        onChange={(e) => {
+          setToggleTopIcon(e);
+        }}
+        id='topicon'
+      />
+      <Checkbox
+        text='right icon'
+        checked={false}
+        onChange={(e) => {
+          setToggleRightIcon(e);
+        }}
+        id='rightIcon'
+      />
+      <Checkbox
+        text='bottom icon'
+        checked={false}
+        onChange={(e) => {
+          setToggleBottomIcon(e);
+        }}
+        id='bottomicon'
+      />
+      <Checkbox
+        text='left icon'
+        checked={false}
+        onChange={(e) => {
+          setToggleLeftIcon(e);
+        }}
+        id='lefticon'
+      />
+    </>
   );
 };
 
@@ -107,6 +111,10 @@ const meta: Meta<typeof Button> = {
       control: 'select',
       options: Object.values(SizesList),
     },
+    id: { control: 'text' },
+  },
+  args: {
+    id: 'cb-button-1',
   },
   parameters: {
     layout: 'centered',
@@ -130,50 +138,18 @@ const meta: Meta<typeof Button> = {
         iconRight: toggleRightIcon ? <StarIcon /> : undefined,
       };
       return (
-        <ThemeProvider themes={[darkDefaultTheme, lightDefaultTheme]}>
-          <div style={containerStyle}>
-            <div style={toolsStyle}>
-              <Checkbox
-                text="top icon"
-                checked={false}
-                onChange={(e) => {
-                  setToggleTopIcon(e);
-                }}
-                id="topicon"
-              />
-              <Checkbox
-                text="right icon"
-                checked={false}
-                onChange={(e) => {
-                  setToggleRightIcon(e);
-                }}
-                id="rightIcon"
-              />
-              <Checkbox
-                text="bottom icon"
-                checked={false}
-                onChange={(e) => {
-                  setToggleBottomIcon(e);
-                }}
-                id="bottomicon"
-              />
-              <Checkbox
-                text="left icon"
-                checked={false}
-                onChange={(e) => {
-                  setToggleLeftIcon(e);
-                }}
-                id="lefticon"
-              />
-              <ThemeToggleButton />
-            </div>
-            <div style={{ marginTop: '20px' }}>
-              <Story args={storyArgs} />
-              <div style={{ width: '5px', height: '5px' }}></div>
-              <Story />
-            </div>
-          </div>
-        </ThemeProvider>
+        <StoryContainer>
+          <StoryToolsContainer>
+            <CheckboxList
+              setToggleTopIcon={setToggleTopIcon}
+              setToggleRightIcon={setToggleRightIcon}
+              setToggleBottomIcon={setToggleBottomIcon}
+              setToggleLeftIcon={setToggleLeftIcon}
+            />
+          </StoryToolsContainer>
+          <Story args={storyArgs} />
+          <Story />
+        </StoryContainer>
       );
     },
   ],
@@ -184,6 +160,7 @@ type Story = StoryObj<typeof Button>;
 
 export const ButtonExample: Story = {
   args: {
+    id: 'cb-button-1',
     children: 'My button',
     disabled: false,
     appearance: AppearanceList.regular,

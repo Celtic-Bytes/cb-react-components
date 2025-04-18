@@ -19,16 +19,42 @@ Ant Design:
 React Bootstrap:
 
 - https://react-bootstrap.netlify.app/docs/components/accordion
-- https://github.com/react-bootstrap/react-bootstrap
+- https://github.com/react-bootstrap/react-bootstrap/tree/master/src
 
 Prime React:
 
 - https://primereact.org/
 - https://github.com/primefaces/primereact/tree/master/components/lib
 
+ShadCN :
+
+- https://ui.shadcn.com/docs/components/accordion
+- https://github.com/radix-ui/primitives/blob/main/packages/react/
+- https://github.com/shadcn-ui/ui/tree/main/apps/www/registry/default/ui
+
+React-toastify:
+
+- https://github.com/fkhadra/react-toastify
+
 # Debug
 
-To debug youre components just add a breakpoint in youre component and run the preconfigured `launch.json` setting.
+To debug youre components just add a breakpoint in youre component and run the preconfigured `launch.json` setting. Or add the following configuration:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Storybook",
+      "url": "http://localhost:6006",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "start-storybook"
+    }
+  ]
+}
+```
 
 # React + TypeScript + Vite
 

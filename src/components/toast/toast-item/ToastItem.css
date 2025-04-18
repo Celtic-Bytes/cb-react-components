@@ -1,0 +1,91 @@
+/* Basic Toast Styling (Adapt as needed) */
+.cb-toast-item {
+  /* Add your base toast styles: padding, margin, background, border-radius, etc. */
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  background-color: #eee;
+  color: #333;
+  display: flex;
+  flex-direction: column; /* Stack main content and progress bar */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Important for progress bar */
+}
+
+.cb-toast-item__main {
+  display: flex;
+  align-items: flex-start; /* Align icon/text/button at the top */
+  gap: 0.75rem;
+}
+
+.cb-toast-item__icon {
+  flex-shrink: 0;
+  /* Add styles for icon size, color based on variant */
+}
+
+.cb-toast-item__content-area {
+  flex-grow: 1; /* Allow content to take available space */
+}
+
+.cb-toast-item__title {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.cb-toast-item__content {
+  font-size: 0.9rem;
+}
+
+.cb-toast-item__action {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  color: inherit; /* Inherit color from parent toast */
+  opacity: 0.7;
+  transition: opacity 0.2s ease-in-out;
+}
+.cb-toast-item__action:hover {
+  opacity: 1;
+}
+
+/* Variant Styling Examples */
+.cb-toast-item--success { background-color: #d4edda; color: #155724; }
+.cb-toast-item--error { background-color: #f8d7da; color: #721c24; }
+.cb-toast-item--warning { background-color: #fff3cd; color: #856404; }
+/* Add styles for info, default, etc. */
+
+
+/* --- Progress Bar --- */
+.cb-toast-item__progress-bar {
+  height: 4px; /* Height of the progress bar container */
+  background-color: rgba(0, 0, 0, 0.1); /* Background of the track */
+  margin-top: 0.5rem; /* Space above the progress bar */
+  /* Ensure it spans the width, adjusted for padding */
+  margin-left: -1rem;
+  margin-right: -1rem;
+  margin-bottom: -1rem; /* Pull it to the bottom edge */
+}
+
+.cb-toast-item__progress-bar-inner {
+  height: 100%;
+  background-color: currentColor; /* Use the toast's text color */
+  opacity: 0.6;
+  width: 100%; /* Start at full width */
+  /* --- The Animation --- */
+  animation: progressBarDecrease var(--toast-duration) linear forwards;
+}
+
+/* Define the animation */
+@keyframes progressBarDecrease {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+

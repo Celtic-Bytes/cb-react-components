@@ -31,7 +31,7 @@ export const getButtonCss = (theme: Theme): string => {
         align-items: center;
         background-color: ${cf.global.accentColor};
         border-radius: ${cf.button.borderRadius || 0};        
-        border-width: ${cf.button.borderWidth || '0.1em'};
+        border-width: ${cf.button.borderWidth || '0.1rem'};
         border-color: transparent;        
         border-style: solid;
         box-sizing: border-box;
@@ -272,5 +272,5 @@ export const getButtonCss = (theme: Theme): string => {
     .cb-button__icon-mb-${SizesList.large}{ margin-bottom: 6px; }
     .cb-button__icon-mb-${SizesList.extralarge}{ margin-bottom: 8px; }
 
-    `;
+  `;
 };

@@ -1,5 +1,7 @@
 import { Theme, ThemeGeneratedCss } from '../../models/ThemeProviders.model';
 import { getButtonCss } from '../button/button-css';
+import { getProgressCss } from '../progress/Progress-css';
+import { getToastItemCss } from '../toast/toast-item/toast-item-css';
 
 export const generateCssForTheme = (theme: Theme): ThemeGeneratedCss => {
   if (!theme) {
@@ -30,7 +32,10 @@ export const generateCssForTheme = (theme: Theme): ThemeGeneratedCss => {
         color: ${cf.global.color} ;
         border-radius: ${cf.global.borderRadius} ;    
     }
-    ` + getButtonCss(theme);
+    ` +
+    getButtonCss(theme) +
+    getProgressCss(theme) +
+    getToastItemCss(theme);
 
   return { css, containerClassname };
 };

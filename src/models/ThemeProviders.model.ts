@@ -1,6 +1,5 @@
 import { ThemeButtonConfig } from './button/Button.model';
-import { ThemeGlobalConfig } from './global/Global.model';
-import { VariantListType } from './variants/Variants.model';
+import { ThemeGlobalConfig, VariantListType } from './global/Global.model';
 
 export interface Theme {
   /**
