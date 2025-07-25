@@ -25,14 +25,21 @@ export type ProgressProps = ProgressTimerProps | ProgressDefaultProps;
 
 // Timer-specific  subcomponent
 const TimerProgress: FC<ProgressTimerProps> = ({
-  duration,
+  duration = 3000,
   onComplete,
   autoStart = true,
   start = false,
 }) => {
   const [isRunning, setIsRunning] = useState(false);
-
   const timerRef = useRef<number | null>(null);
+
+  const reset = (): void => {
+    if (timerRef.current !== null) {
+      clearInterval(timerRef.current);
+      setIsRunning(false);
+      timerRef.current = null;
+    }
+  };
 
   useEffect(() => {
     const shouldStart = (autoStart || (!autoStart && start)) && duration > 0;
@@ -41,13 +48,10 @@ const TimerProgress: FC<ProgressTimerProps> = ({
       setIsRunning(true);
       timerRef.current = window.setTimeout(() => {
         onComplete?.();
+        reset();
       }, duration);
       return () => {
-        if (timerRef.current !== null) {
-          clearInterval(timerRef.current);
-          setIsRunning(false);
-          timerRef.current = null;
-        }
+        reset();
       };
     }
   }, [autoStart, start, duration, onComplete]);
@@ -83,12 +87,29 @@ const DefaultProgress: FC<ProgressDefaultProps> = ({
   );
 };
 
+// Utility function to filter props
+const filterHtmlProps = (
+  props: ProgressProps
+): HTMLAttributes<HTMLDivElement> => {
+  if (props.type === ProgressTypesList.timer) {
+    // Narrowed to ProgressTimerProps
+    const { duration, autoStart, start, onComplete, ...htmlProps } = props;
+    return htmlProps;
+  } else {
+    // Narrowed to ProgressDefaultProps
+    const { value, max, onComplete, ...htmlProps } = props;
+    return htmlProps;
+  }
+};
+
 // Main wrapper component
 export const Progress: FC<ProgressProps> = (props) => {
   const generatedId = useRef(`cb-progress-bar-${useId()}`);
+  const htmlProps = filterHtmlProps(props);
+
   return (
     <div
-      {...props}
+      {...htmlProps}
       id={props.id ?? generatedId.current}
       className={['cb-progress-container', props.className]
         .filter(Boolean)

@@ -36,9 +36,15 @@ React-toastify:
 
 - https://github.com/fkhadra/react-toastify
 
+# Description
+
+This project is a free component library for React. I didn't like the current libraries on the market. I wanted something simple, customizable, and without Tailwind. So I decided to create my own component library. This library is experimental and shouldn't be used for production.
+
+# How to use it
+
 # Debug
 
-To debug youre components just add a breakpoint in youre component and run the preconfigured `launch.json` setting. Or add the following configuration:
+To debug your components just add a breakpoint in your component and run the pre-configured `launch.json` setting. Or add the following configuration:
 
 ```json
 {
