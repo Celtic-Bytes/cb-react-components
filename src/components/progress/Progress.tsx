@@ -1,4 +1,4 @@
-import { ProgressTypesList } from '@src/models/progress/Progress.model';
+import { ProgressTypesList } from '@src/models/progress/progress.model';
 import { FC, HTMLAttributes, useEffect, useId, useRef, useState } from 'react';
 
 interface ProgressBaseProps extends HTMLAttributes<HTMLDivElement> {

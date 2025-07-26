@@ -3,7 +3,7 @@ import {
   BackgroundVariant,
   Sizes,
   Variant,
-} from '@src/models/global/Global.model';
+} from '@src/models/global/global.model';
 
 export interface Toast {
   id: string;
@@ -18,4 +18,11 @@ export interface Toast {
   showProgressBar?: boolean;
   size?: Sizes;
   onClose?: (id: string) => void;
+}
+
+export interface ToastContextValue {
+  toasts: Toast[];
+  addToast: (toast: Toast) => void;
+  removeToast: (id: string) => void;
+  clearToasts: () => void;
 }

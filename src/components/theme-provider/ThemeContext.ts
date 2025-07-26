@@ -1,4 +1,4 @@
-import { Theme } from '@src/models/ThemeProviders.model';
+import { Theme } from '@src/models/theme/theme.model';
 import { createContext } from 'react';
 
 export const ThemeContext = createContext<{

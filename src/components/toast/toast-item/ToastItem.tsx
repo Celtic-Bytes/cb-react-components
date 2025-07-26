@@ -4,7 +4,7 @@ import {
   Sizes,
   Variant,
   VariantList,
-} from '@src/models/global/Global.model';
+} from '@src/models/global/global.model';
 import { getVariantIcon } from '@src/utils/icon-utils';
 import {
   FC,

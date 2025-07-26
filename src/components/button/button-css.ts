@@ -1,6 +1,6 @@
 import { Theme } from '@src/main';
-import { AppearanceList } from '@src/models/button/Button.model';
-import { SizesList, VariantList } from '@src/models/global/Global.model';
+import { AppearanceList } from '@src/models/button/button.model';
+import { SizesList, VariantList } from '@src/models/global/global.model';
 
 export const getButtonCss = (theme: Theme): string => {
   const cf = theme.config;

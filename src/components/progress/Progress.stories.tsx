@@ -1,4 +1,4 @@
-import { ProgressTypesList } from '@src/models/progress/Progress.model';
+import { ProgressTypesList } from '@src/models/progress/progress.model';
 import { StoryContainer } from '@src/stories/components/StoryContainer';
 import { StoryToolsContainer } from '@src/stories/components/StoryToolsContainer';
 import { action } from '@storybook/addon-actions';

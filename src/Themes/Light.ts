@@ -1,4 +1,4 @@
-import { Theme } from '../models/ThemeProviders.model';
+import { Theme } from '../models/theme/theme.model';
 
 export const lightDefaultTheme: Theme = {
   key: 'default-light-theme',

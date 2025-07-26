@@ -7,13 +7,13 @@ import {
   useRef,
 } from 'react';
 
-import { Appearance, AppearanceList } from '@src/models/button/Button.model';
+import { Appearance, AppearanceList } from '@src/models/button/button.model';
 import {
   Sizes,
   SizesList,
   Variant,
   VariantList,
-} from '@src/models/global/Global.model';
+} from '@src/models/global/global.model';
 
 const baseClassName = 'cb-button';
 interface GenerateClass {

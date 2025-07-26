@@ -2,7 +2,7 @@ import {
   BackgroundVariantList,
   SizesList,
   VariantList,
-} from '@src/models/global/Global.model';
+} from '@src/models/global/global.model';
 import { StoryContainer } from '@src/stories/components/StoryContainer';
 import { StoryToolsContainer } from '@src/stories/components/StoryToolsContainer';
 import { Meta, StoryObj } from '@storybook/react';

@@ -1,4 +1,4 @@
-import { Theme } from '../models/ThemeProviders.model';
+import { Theme } from '../models/theme/theme.model';
 
 export const darkDefaultTheme: Theme = {
   key: 'default-dark-theme',

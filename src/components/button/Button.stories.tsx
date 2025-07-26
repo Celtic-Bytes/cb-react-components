@@ -4,8 +4,8 @@ import { StarIcon } from '@src/icons/icons';
 import { StoryContainer } from '@src/stories/components/StoryContainer';
 import { StoryToolsContainer } from '@src/stories/components/StoryToolsContainer';
 import { useState } from 'react';
-import { AppearanceList } from '../../models/button/Button.model';
-import { SizesList, VariantList } from '../../models/global/Global.model';
+import { AppearanceList } from '../../models/button/button.model';
+import { SizesList, VariantList } from '../../models/global/global.model';
 import { Button } from './Button';
 
 const Checkbox = ({

@@ -1,4 +1,4 @@
-import { Theme } from '@src/models/ThemeProviders.model';
+import { Theme } from '@src/models/theme/theme.model';
 
 export const getToastItemCss = (theme: Theme): string => {
   const cf = theme.config;

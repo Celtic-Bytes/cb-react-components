@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Theme } from '../../models/ThemeProviders.model';
+import { Theme } from '../../models/theme/theme.model';
 import { darkDefaultTheme } from '../../Themes/Dark';
 import { lightDefaultTheme } from '../../Themes/Light';
 import { ThemeContext } from './ThemeContext';

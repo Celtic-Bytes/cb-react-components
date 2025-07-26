@@ -1,4 +1,4 @@
-import { Theme, ThemeGeneratedCss } from '../../models/ThemeProviders.model';
+import { Theme, ThemeGeneratedCss } from '../../models/theme/theme.model';
 import { getButtonCss } from '../button/button-css';
 import { getProgressCss } from '../progress/Progress-css';
 import { getToastItemCss } from '../toast/toast-item/toast-item-css';

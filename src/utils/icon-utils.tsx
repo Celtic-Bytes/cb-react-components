@@ -6,7 +6,7 @@ import {
   SuccessIcon,
   WarningIcon,
 } from '@src/icons/icons';
-import { Variant } from '@src/models/global/Global.model';
+import { Variant } from '@src/models/global/global.model';
 import { ReactNode } from 'react';
 
 export const getVariantIcon = (variant: Variant): ReactNode | null => {
