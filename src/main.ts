@@ -1,4 +1,4 @@
 export { Button } from './components/button/Button';
-export { Stack as MenuBar } from './components/stack/Stack';
-export { Toast } from './components/toast/Toast';
+export { Progress } from './components/progress/Progress';
+export { Stack } from './components/stack/Stack';
 export type { Theme } from './models/ThemeProviders.model';
