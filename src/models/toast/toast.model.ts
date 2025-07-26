@@ -22,7 +22,7 @@ export interface Toast {
 
 export interface ToastContextValue {
   toasts: Toast[];
-  addToast: (toast: Toast) => void;
+  addToast: (toast: Omit<Toast, 'id'>) => string;
   removeToast: (id: string) => void;
   clearToasts: () => void;
 }
