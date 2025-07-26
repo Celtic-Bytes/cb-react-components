@@ -84,36 +84,6 @@ component-name/
 - Variant-based icon mapping in `src/utils/icon-utils.tsx`
 - Icons support `SVGProps<SVGSVGElement>` with `currentColor` fill
 
-## Component Library Specifics
-
-### Button Component
-
-- Supports multiple appearances: `regular`, `outlined`, `text`
-- Four-directional icon support (`iconTop`, `iconBottom`, `iconLeft`, `iconRight`)
-- Complex CSS class generation logic for variant/appearance combinations
-- Grid-based layout for icon positioning
-
-### Progress Component
-
-- Discriminated union types for timer vs. standard progress modes
-- CSS animations for timer countdown
-- Auto-start and manual trigger capabilities
-
-### Toast System
-
-- Modular design with separate `ToastItem` component
-- Progress bar integration for auto-dismiss
-- Grid-based layout for icon, content, and action areas
-
-## File Organization
-
-- `/src/main.ts` - Library entry point with public exports
-- `/src/components/` - All components with sub-folders
-- `/src/models/` - TypeScript interfaces and enums
-- `/src/Themes/` - Theme definitions
-- `/src/stories/` - Shared Storybook utilities
-- `/src/icons/` - SVG icon components
-
 ## Build & Distribution
 
 - Vite library mode builds both ESM and UMD formats
