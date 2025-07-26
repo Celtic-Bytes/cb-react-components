@@ -1,15 +1,11 @@
-import {
-  ButtonHTMLAttributes,
-  FC,
-  HTMLAttributes,
-  ReactNode,
-  useId,
-  useRef,
-} from 'react';
+import { FC, useId, useRef } from 'react';
 
-import { Appearance, AppearanceList } from '@src/models/button/button.model';
 import {
-  Sizes,
+  Appearance,
+  AppearanceList,
+  ButtonProps,
+} from '@src/models/button/button.model';
+import {
   SizesList,
   Variant,
   VariantList,
@@ -61,19 +57,6 @@ const generateTextClassName = ({
     ? ` cb-button--${AppearanceList.outlined}-${AppearanceList.text}`
     : '';
 };
-
-export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  appearance?: Appearance;
-  disabled?: boolean;
-  iconBottom?: ReactNode;
-  iconLeft?: ReactNode;
-  iconRight?: ReactNode;
-  iconTop?: ReactNode;
-  id?: string;
-  size?: Sizes;
-  type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
-  variant?: Variant;
-}
 
 export const Button: FC<ButtonProps> = ({
   appearance = AppearanceList.regular,

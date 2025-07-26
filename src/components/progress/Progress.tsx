@@ -1,27 +1,10 @@
-import { ProgressTypesList } from '@src/models/progress/progress.model';
+import {
+  ProgressDefaultProps,
+  ProgressProps,
+  ProgressTimerProps,
+  ProgressTypesList,
+} from '@src/models/progress/progress.model';
 import { FC, HTMLAttributes, useEffect, useId, useRef, useState } from 'react';
-
-interface ProgressBaseProps extends HTMLAttributes<HTMLDivElement> {
-  id?: string;
-  onComplete?: () => void;
-}
-
-export interface ProgressTimerProps extends ProgressBaseProps {
-  duration: number;
-  type: typeof ProgressTypesList.timer;
-  /** Define if the timers starts immediately */
-  autoStart: boolean;
-  /** when autostart === false , start===true will start the timer*/
-  start: boolean;
-}
-
-export interface ProgressDefaultProps extends ProgressBaseProps {
-  value?: number;
-  max?: number;
-  type: typeof ProgressTypesList.default;
-}
-
-export type ProgressProps = ProgressTimerProps | ProgressDefaultProps;
 
 // Timer-specific  subcomponent
 const TimerProgress: FC<ProgressTimerProps> = ({

@@ -1,12 +1,7 @@
-import { Theme } from '@src/models/theme/theme.model';
+import { ThemeContextValue } from '@src/models/theme/theme.model';
 import { createContext } from 'react';
 
-export const ThemeContext = createContext<{
-  themes: Theme[];
-  currentTheme: Theme | undefined;
-  currentThemeIndex: number;
-  switchThemeByIndex: (index: number) => void;
-}>({
+export const ThemeContext = createContext<ThemeContextValue>({
   themes: [],
   currentTheme: undefined,
   currentThemeIndex: 0,

@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { ThemeButtonConfig } from '../button/button.model';
 import { ThemeGlobalConfig, VariantListType } from '../global/global.model';
 
@@ -22,4 +23,17 @@ export interface ThemeConfig {
 export interface ThemeGeneratedCss {
   containerClassname: string;
   css: string;
+}
+
+export interface ThemeContextValue {
+  themes: Theme[];
+  currentTheme: Theme | undefined;
+  currentThemeIndex: number;
+  switchThemeByIndex: (index: number) => void;
+}
+
+export interface ThemeProviderProps {
+  id?: string;
+  children: ReactNode;
+  themes?: Theme[];
 }

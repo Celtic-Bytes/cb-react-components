@@ -32,31 +32,114 @@ export const ToastProvider: FC<{ children: ReactNode }> = ({ children }) => {
     clearToasts,
   };
 
+  // Position mapping
+  const positionMap: Record<
+    | 'top-start'
+    | 'top-center'
+    | 'top-end'
+    | 'middle-start'
+    | 'middle-center'
+    | 'middle-end'
+    | 'bottom-start'
+    | 'bottom-center'
+    | 'bottom-end',
+    { [key: string]: string | number }
+  > = {
+    'top-start': {
+      top: 24,
+      left: 24,
+      alignItems: 'flex-start',
+      flexDirection: 'column',
+    },
+    'top-center': {
+      top: 24,
+      left: '50%',
+      transform: 'translateX(-50%)',
+      alignItems: 'center',
+      flexDirection: 'column',
+    },
+    'top-end': {
+      top: 24,
+      right: 24,
+      alignItems: 'flex-end',
+      flexDirection: 'column',
+    },
+    'middle-start': {
+      top: '50%',
+      left: 24,
+      transform: 'translateY(-50%)',
+      alignItems: 'flex-start',
+      flexDirection: 'column',
+    },
+    'middle-center': {
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      alignItems: 'center',
+      flexDirection: 'column',
+    },
+    'middle-end': {
+      top: '50%',
+      right: 24,
+      transform: 'translateY(-50%)',
+      alignItems: 'flex-end',
+      flexDirection: 'column',
+    },
+    'bottom-start': {
+      bottom: 24,
+      left: 24,
+      alignItems: 'flex-start',
+      flexDirection: 'column-reverse',
+    },
+    'bottom-center': {
+      bottom: 24,
+      left: '50%',
+      transform: 'translateX(-50%)',
+      alignItems: 'center',
+      flexDirection: 'column-reverse',
+    },
+    'bottom-end': {
+      bottom: 24,
+      right: 24,
+      alignItems: 'flex-end',
+      flexDirection: 'column-reverse',
+    },
+  };
+
+  // Group toasts by position
+  const groupedToasts: { [key: string]: Toast[] } = {};
+  toasts.forEach((toast) => {
+    const pos = toast.position || 'top-end';
+    if (!groupedToasts[pos]) groupedToasts[pos] = [];
+    groupedToasts[pos].push(toast);
+  });
+
   return (
     <ToastContext value={value}>
       {children}
-      <div
-        className='cb-toast-container'
-        style={{
-          position: 'fixed',
-          top: 24,
-          right: 24,
-          zIndex: 9999,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 12,
-        }}
-      >
-        {toasts.map((toast) => (
-          <ToastItem
-            key={toast.id}
-            {...toast}
-            onClose={toast.onClose ?? removeToast}
-          >
-            {toast.message}
-          </ToastItem>
-        ))}
-      </div>
+      {Object.entries(groupedToasts).map(([position, items]) => (
+        <div
+          key={position}
+          className={`cb-toast-container cb-toast-container--${position}`}
+          style={{
+            position: 'fixed',
+            zIndex: 9999,
+            gap: 12,
+            display: 'flex',
+            ...positionMap[position as keyof typeof positionMap],
+          }}
+        >
+          {items.map((toast) => (
+            <ToastItem
+              key={toast.id}
+              {...toast}
+              onClose={toast.onClose ?? removeToast}
+            >
+              {toast.message}
+            </ToastItem>
+          ))}
+        </div>
+      ))}
     </ToastContext>
   );
 };

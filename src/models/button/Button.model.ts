@@ -1,3 +1,18 @@
+import { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react';
+import { Sizes, Variant } from '../global/global.model';
+
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+  appearance?: Appearance;
+  disabled?: boolean;
+  iconBottom?: ReactNode;
+  iconLeft?: ReactNode;
+  iconRight?: ReactNode;
+  iconTop?: ReactNode;
+  id?: string;
+  size?: Sizes;
+  type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
+  variant?: Variant;
+}
 export interface ThemeButtonConfig {
   borderWidth: string;
   borderRadius: string;

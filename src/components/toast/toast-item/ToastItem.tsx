@@ -1,40 +1,16 @@
 import {
-  BackgroundVariant,
   BackgroundVariantList,
-  Sizes,
-  Variant,
   VariantList,
 } from '@src/models/global/global.model';
+import { ToastItemProps } from '@src/models/toast/toast.model';
 import { getVariantIcon } from '@src/utils/icon-utils';
-import {
-  FC,
-  HTMLAttributes,
-  ReactNode,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from 'react';
+import { FC, useEffect, useId, useRef, useState } from 'react';
 
 const baseClassName = 'cb-toast-item';
 
 /**
  * To pass the message use the 'children' prop.
  */
-export interface ToastItemProps extends HTMLAttributes<HTMLDivElement> {
-  backgroundVariant?: BackgroundVariant;
-  /** Duration in milliseconds */
-  duration?: number;
-  icon?: ReactNode;
-  id?: string;
-  onClose?: (id: string) => void;
-  persistant?: boolean;
-  showIcon?: boolean;
-  showProgressBar?: boolean;
-  size?: Sizes;
-  title?: string;
-  variant?: Variant;
-}
 
 /**
  * To pass the message use the 'children' prop or use composition.

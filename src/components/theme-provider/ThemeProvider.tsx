@@ -1,6 +1,5 @@
 import {
   FC,
-  ReactNode,
   useCallback,
   useEffect,
   useId,
@@ -8,19 +7,13 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Theme } from '../../models/theme/theme.model';
+import { Theme, ThemeProviderProps } from '../../models/theme/theme.model';
 import { darkDefaultTheme } from '../../Themes/Dark';
 import { lightDefaultTheme } from '../../Themes/Light';
 import { ThemeContext } from './ThemeContext';
 import { generateCssForTheme } from './ThemeCssGenerator';
 
 const defaultThemes: Theme[] = [darkDefaultTheme, lightDefaultTheme];
-
-export interface ThemeProviderProps {
-  id?: string;
-  children: ReactNode;
-  themes?: Theme[];
-}
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({
   id,
