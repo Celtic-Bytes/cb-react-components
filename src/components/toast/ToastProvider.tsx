@@ -1,6 +1,7 @@
 import type { Toast, ToastContextValue } from '@src/models/toast/toast.model';
 import { FC, ReactNode, useCallback, useState } from 'react';
 import { ToastContext } from './ToastContext';
+import { ToastItem } from './toast-item/ToastItem';
 
 export const ToastProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
@@ -31,5 +32,31 @@ export const ToastProvider: FC<{ children: ReactNode }> = ({ children }) => {
     clearToasts,
   };
 
-  return <ToastContext value={value}>{children}</ToastContext>;
+  return (
+    <ToastContext value={value}>
+      {children}
+      <div
+        className='cb-toast-container'
+        style={{
+          position: 'fixed',
+          top: 24,
+          right: 24,
+          zIndex: 9999,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 12,
+        }}
+      >
+        {toasts.map((toast) => (
+          <ToastItem
+            key={toast.id}
+            {...toast}
+            onClose={toast.onClose ?? removeToast}
+          >
+            {toast.message}
+          </ToastItem>
+        ))}
+      </div>
+    </ToastContext>
+  );
 };
