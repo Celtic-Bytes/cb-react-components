@@ -11,6 +11,7 @@ import { ToastContext } from './ToastContext';
 import { ToastItem } from './toast-item/ToastItem';
 
 export const ToastProvider: FC<ToastProviderProps> = ({ children, id }) => {
+  const MAX_TOASTS_PER_GROUP = 5;
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   /**
@@ -20,7 +21,22 @@ export const ToastProvider: FC<ToastProviderProps> = ({ children, id }) => {
    */
   const addToast = useCallback((toast: Omit<Toast, 'id'>) => {
     const id = `$cb-toast-${crypto.randomUUID()}`;
-    setToasts((prev) => [...prev, { ...toast, id }]);
+    setToasts((prev) => {
+      // Find position for new toast
+      const position = toast.position || PositionsList.topEnd;
+      // Filter toasts for this position
+      const positionToasts = prev.filter(
+        (t) => (t.position || PositionsList.topEnd) === position
+      );
+      // If max or more, remove oldest in this position
+      let newPrev = prev;
+      if (positionToasts.length >= MAX_TOASTS_PER_GROUP) {
+        // Remove the oldest toast in this position
+        const oldestId = positionToasts[0].id;
+        newPrev = prev.filter((t) => t.id !== oldestId);
+      }
+      return [...newPrev, { ...toast, id }];
+    });
     return id;
   }, []);
 
