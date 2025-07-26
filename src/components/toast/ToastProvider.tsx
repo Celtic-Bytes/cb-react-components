@@ -1,9 +1,12 @@
+import { Position, PositionsList } from '@src/models/global/global.model';
 import type {
   Toast,
   ToastContextValue,
+  ToastPositionMapValue,
   ToastProviderProps,
 } from '@src/models/toast/toast.model';
 import { FC, useCallback, useId, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { ToastContext } from './ToastContext';
 import { ToastItem } from './toast-item/ToastItem';
 
@@ -37,18 +40,7 @@ export const ToastProvider: FC<ToastProviderProps> = ({ children, id }) => {
   };
 
   // Position mapping
-  const positionMap: Record<
-    | 'top-start'
-    | 'top-center'
-    | 'top-end'
-    | 'middle-start'
-    | 'middle-center'
-    | 'middle-end'
-    | 'bottom-start'
-    | 'bottom-center'
-    | 'bottom-end',
-    { [key: string]: string | number }
-  > = {
+  const positionMap: Record<Position, ToastPositionMapValue> = {
     'top-start': {
       top: 24,
       left: 24,
@@ -111,43 +103,58 @@ export const ToastProvider: FC<ToastProviderProps> = ({ children, id }) => {
   };
 
   // Group toasts by position
-  const groupedToasts: { [key: string]: Toast[] } = {};
+  const groupedToasts: Record<Position, Toast[]> = {
+    'top-start': [],
+    'top-center': [],
+    'top-end': [],
+    'middle-start': [],
+    'middle-center': [],
+    'middle-end': [],
+    'bottom-start': [],
+    'bottom-center': [],
+    'bottom-end': [],
+  };
   toasts.forEach((toast) => {
-    const pos = toast.position || 'top-end';
-    if (!groupedToasts[pos]) groupedToasts[pos] = [];
+    const pos: Position = toast.position || PositionsList.topEnd;
+    if (!groupedToasts[pos]) {
+      groupedToasts[pos] = [];
+    }
     groupedToasts[pos].push(toast);
   });
 
   const generatedId = useRef(`cb-toast-provider-${useId()}`);
 
-  return (
-    <ToastContext value={value}>
-      <div id={id ?? generatedId.current}>
-        {children}
-        {Object.entries(groupedToasts).map(([position, items]) => (
-          <div
-            key={position}
-            className={`cb-toast-container cb-toast-container--${position}`}
-            style={{
-              position: 'fixed',
-              zIndex: 9999,
-              gap: 12,
-              display: 'flex',
-              ...positionMap[position as keyof typeof positionMap],
-            }}
+  const toastContainers = Object.entries(groupedToasts).map(
+    ([position, items]) => (
+      <div
+        id={id ?? generatedId.current}
+        key={position}
+        className={`cb-toast-container cb-toast-container--${position}`}
+        style={{
+          position: 'fixed',
+          zIndex: 9999,
+          gap: 12,
+          display: 'flex',
+          ...positionMap[position as Position],
+        }}
+      >
+        {items.map((toast) => (
+          <ToastItem
+            key={toast.id}
+            {...toast}
+            onClose={toast.onClose ?? removeToast}
           >
-            {items.map((toast) => (
-              <ToastItem
-                key={toast.id}
-                {...toast}
-                onClose={toast.onClose ?? removeToast}
-              >
-                {toast.message}
-              </ToastItem>
-            ))}
-          </div>
+            {toast.message}
+          </ToastItem>
         ))}
       </div>
+    )
+  );
+
+  return (
+    <ToastContext value={value}>
+      {children}
+      {ReactDOM.createPortal(toastContainers, document.body)}
     </ToastContext>
   );
 };

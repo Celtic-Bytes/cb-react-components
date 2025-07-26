@@ -49,3 +49,13 @@ export interface ToastProviderProps {
   id?: string;
   children: ReactNode;
 }
+
+export interface ToastPositionMapValue {
+  top?: number | string;
+  bottom?: number | string;
+  left?: number | string;
+  right?: number | string;
+  transform?: string;
+  alignItems: 'flex-start' | 'center' | 'flex-end';
+  flexDirection: 'column' | 'column-reverse';
+}

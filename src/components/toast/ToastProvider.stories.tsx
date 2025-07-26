@@ -20,31 +20,11 @@ const meta: Meta<typeof ToastProvider> = {
     },
   },
   argTypes: {
-    // Toast item configuration options
-    addToast: {
-      description:
-        'Adds a new toast. Accepts all Toast item props except id. Returns the toast id.',
+    id: {
+      control: 'text',
+      description: 'Optional ID for the ToastProvider component.',
       table: {
-        type: { summary: 'function' },
-      },
-    },
-    removeToast: {
-      description: 'Removes a toast by id.',
-      table: {
-        type: { summary: 'function' },
-      },
-    },
-    clearToasts: {
-      description: 'Removes all toasts.',
-      table: {
-        type: { summary: 'function' },
-      },
-    },
-    // Toast item props
-    toasts: {
-      description: 'Current list of toasts.',
-      table: {
-        type: { summary: 'Toast[]' },
+        type: { summary: 'string' },
       },
     },
   },
@@ -55,7 +35,7 @@ type Story = StoryObj<typeof ToastProvider>;
 
 const Demo = () => {
   const { addToast } = useToast();
-  const [position, setPosition] = React.useState('top-end');
+  const [position, setPosition] = React.useState('top-start');
   const positions = [
     'top-start',
     'top-center',

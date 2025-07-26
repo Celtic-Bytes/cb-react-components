@@ -34,33 +34,34 @@ export const ToastItem: FC<ToastItemProps> = ({
 
   // progress bar
   const [remainingTime, setRemainingTime] = useState(duration);
-  const [countdownStarted, setCountdownStarted] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const variantIcon = getVariantIcon(variant);
 
   useEffect(() => {
     if (persistant || !showProgressBar) return;
+    const updateRangeInMilliseconds = 10;
 
-    let timer: NodeJS.Timeout | null = null;
-    const updateRangeInMilliseconds = 1;
-
-    if (remainingTime > 0 && !countdownStarted) {
-      timer = setInterval(() => {
-        setRemainingTime(remainingTime - updateRangeInMilliseconds);
-        setCountdownStarted(true);
+    if (remainingTime > 0 && !timerRef.current) {
+      timerRef.current = setInterval(() => {
+        setRemainingTime((prev) => {
+          if (prev <= updateRangeInMilliseconds) {
+            clearInterval(timerRef.current!);
+            timerRef.current = null;
+            return 0;
+          }
+          return prev - updateRangeInMilliseconds;
+        });
       }, updateRangeInMilliseconds);
     }
 
-    if (remainingTime <= 0 && countdownStarted) {
-      clearInterval(timer ?? undefined);
-      setCountdownStarted(false);
-    }
-
     return () => {
-      clearInterval(timer ?? undefined);
-      setCountdownStarted(false);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
     };
-  }, [remainingTime, countdownStarted, persistant, showProgressBar]);
+  }, [persistant, showProgressBar, duration, remainingTime]);
 
   return (
     <div
