@@ -44,3 +44,8 @@ export interface ToastItemProps extends HTMLAttributes<HTMLDivElement> {
   title?: string;
   variant?: Variant;
 }
+
+export interface ToastProviderProps {
+  id?: string;
+  children: ReactNode;
+}

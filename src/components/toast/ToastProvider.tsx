@@ -1,9 +1,13 @@
-import type { Toast, ToastContextValue } from '@src/models/toast/toast.model';
-import { FC, ReactNode, useCallback, useState } from 'react';
+import type {
+  Toast,
+  ToastContextValue,
+  ToastProviderProps,
+} from '@src/models/toast/toast.model';
+import { FC, useCallback, useId, useRef, useState } from 'react';
 import { ToastContext } from './ToastContext';
 import { ToastItem } from './toast-item/ToastItem';
 
-export const ToastProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export const ToastProvider: FC<ToastProviderProps> = ({ children, id }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   /**
@@ -114,32 +118,36 @@ export const ToastProvider: FC<{ children: ReactNode }> = ({ children }) => {
     groupedToasts[pos].push(toast);
   });
 
+  const generatedId = useRef(`cb-toast-provider-${useId()}`);
+
   return (
     <ToastContext value={value}>
-      {children}
-      {Object.entries(groupedToasts).map(([position, items]) => (
-        <div
-          key={position}
-          className={`cb-toast-container cb-toast-container--${position}`}
-          style={{
-            position: 'fixed',
-            zIndex: 9999,
-            gap: 12,
-            display: 'flex',
-            ...positionMap[position as keyof typeof positionMap],
-          }}
-        >
-          {items.map((toast) => (
-            <ToastItem
-              key={toast.id}
-              {...toast}
-              onClose={toast.onClose ?? removeToast}
-            >
-              {toast.message}
-            </ToastItem>
-          ))}
-        </div>
-      ))}
+      <div id={id ?? generatedId.current}>
+        {children}
+        {Object.entries(groupedToasts).map(([position, items]) => (
+          <div
+            key={position}
+            className={`cb-toast-container cb-toast-container--${position}`}
+            style={{
+              position: 'fixed',
+              zIndex: 9999,
+              gap: 12,
+              display: 'flex',
+              ...positionMap[position as keyof typeof positionMap],
+            }}
+          >
+            {items.map((toast) => (
+              <ToastItem
+                key={toast.id}
+                {...toast}
+                onClose={toast.onClose ?? removeToast}
+              >
+                {toast.message}
+              </ToastItem>
+            ))}
+          </div>
+        ))}
+      </div>
     </ToastContext>
   );
 };

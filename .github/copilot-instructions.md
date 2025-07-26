@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a custom React component library built without Tailwind, using TypeScript, Vite, and Storybook. The project emphasizes simplicity, customization, and a cohesive theming system.
+This is a custom React 19 or higher component library built without Tailwind, using TypeScript, Vite, and Storybook. The project emphasizes simplicity, customization, and a cohesive theming system.
 
 ## Architecture & Key Patterns
 

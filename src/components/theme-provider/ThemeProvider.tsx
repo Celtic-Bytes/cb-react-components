@@ -20,6 +20,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   children,
   themes = defaultThemes,
 }) => {
+  //TODO: check this unused prop and refactor, also review his ThemeProviderProp interface to see if the methods have to be added
   const [cbThemes, setCbThemes] = useState<Theme[]>(themes);
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
   const currentTheme = cbThemes[currentThemeIndex];
