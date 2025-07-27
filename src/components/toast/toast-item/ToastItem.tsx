@@ -1,3 +1,4 @@
+import { Progress } from '@src/components/progress/Progress';
 import { VariantList } from '@src/models/global/global.model';
 import { ToastItemProps } from '@src/models/toast/toast.model';
 import { getVariantIcon } from '@src/utils/icon-utils';
@@ -123,12 +124,11 @@ export const ToastItem: FC<ToastItemProps> = ({
 
       {/* Render progress bar only if enabled and not persistent */}
       {!persistent && showProgressBar && duration > 0 && (
-        <div className={''}>
-          <progress
-            value={remainingTime}
-            max={duration}
-          />
-        </div>
+        <Progress
+          duration={3000}
+          type='timer'
+          autoStart={false}
+        />
       )}
     </div>
   );

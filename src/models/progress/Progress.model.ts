@@ -21,9 +21,9 @@ export interface ProgressTimerProps extends ProgressBaseProps {
   duration: number;
   type: typeof ProgressTypesList.timer;
   /** Define if the timers starts immediately */
-  autoStart: boolean;
-  /** when autostart === false , start===true will start the timer*/
-  start: boolean;
+  autoStart?: boolean;
+  /** when autostart === false , start===true will start the timer when the user decide to start it*/
+  start?: boolean;
 }
 
 export interface ProgressDefaultProps extends ProgressBaseProps {

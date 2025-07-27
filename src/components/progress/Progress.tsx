@@ -70,7 +70,7 @@ const DefaultProgress: FC<ProgressDefaultProps> = ({
   );
 };
 
-// Utility function to filter props
+// Utility function to filter props depending if the Progress is a Timer or Default type
 const filterHtmlProps = (
   props: ProgressProps
 ): HTMLAttributes<HTMLDivElement> => {
