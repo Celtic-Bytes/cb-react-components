@@ -38,7 +38,10 @@ export interface ToastItemProps extends HTMLAttributes<HTMLDivElement> {
   id?: string;
   message?: string;
   onClose?: (id: string) => void;
-  persistent?: boolean;
+  /**
+   * If true, toast will close automatically after duration. If false, stays until manually closed.
+   */
+  autoClose?: boolean;
   position?: Position;
   showIcon?: boolean;
   showProgressBar?: boolean;

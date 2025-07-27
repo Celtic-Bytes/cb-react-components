@@ -10,13 +10,18 @@ const baseClassName = 'cb-toast-item';
 /**
  * To pass the message use the 'children' prop or use composition.
  */
+/**
+ * To pass the message use the 'children' prop or use composition.
+ *
+ * autoClose: If true, toast will close automatically after duration. If false, stays until manually closed.
+ */
 export const ToastItem: FC<ToastItemProps> = ({
   children,
   duration = 3000,
   icon,
   id,
   onClose,
-  persistent,
+  autoClose = true,
   showIcon = true,
   showProgressBar,
   title,
@@ -36,7 +41,7 @@ export const ToastItem: FC<ToastItemProps> = ({
 
   // Disappear animation before unmount (auto-close)
   useEffect(() => {
-    if (!persistent && duration > 0 && !showProgressBar) {
+    if (autoClose && duration > 0 && !showProgressBar) {
       const timeout = setTimeout(() => {
         setVisible(false);
         // Wait for animation before calling onClose
@@ -46,7 +51,7 @@ export const ToastItem: FC<ToastItemProps> = ({
       }, duration);
       return () => clearTimeout(timeout);
     }
-  }, [persistent, duration, showProgressBar, onClose, id]);
+  }, [autoClose, duration, showProgressBar, onClose, id]);
 
   // progress bar
   const [remainingTime, setRemainingTime] = useState(duration);
@@ -55,7 +60,7 @@ export const ToastItem: FC<ToastItemProps> = ({
   const variantIcon = getVariantIcon(variant);
 
   useEffect(() => {
-    if (persistent || !showProgressBar) return;
+    if (!autoClose || !showProgressBar) return;
     const updateRangeInMilliseconds = 10;
 
     if (remainingTime > 0 && !timerRef.current) {
@@ -77,7 +82,7 @@ export const ToastItem: FC<ToastItemProps> = ({
         timerRef.current = null;
       }
     };
-  }, [persistent, showProgressBar, duration, remainingTime]);
+  }, [autoClose, showProgressBar, duration, remainingTime]);
 
   return (
     <div
@@ -101,8 +106,8 @@ export const ToastItem: FC<ToastItemProps> = ({
           {title && <div className={'cb-toast-item__title'}>{title}</div>}
           <div className={'cb-toast-item__content'}>{children}</div>
         </div>
-        {/* Render close button if persistent or if onClose provided */}
-        {(persistent || onClose) && (
+        {/* Render close button if not autoClose or if onClose provided */}
+        {(!autoClose || onClose) && (
           <button
             onClick={() => {
               setVisible(false);
@@ -118,8 +123,8 @@ export const ToastItem: FC<ToastItemProps> = ({
         )}
       </div>
 
-      {/* Render progress bar only if enabled and not persistent */}
-      {!persistent && showProgressBar && duration > 0 && (
+      {/* Render progress bar only if enabled and autoClose */}
+      {autoClose && showProgressBar && duration > 0 && (
         <Progress
           duration={3000}
           type='timer'
