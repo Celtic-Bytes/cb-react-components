@@ -1,4 +1,5 @@
 import { Button } from '@src/components/button/Button';
+import { InfoIcon } from '@src/icons/icons';
 import { StoryContainer } from '@src/stories/components/StoryContainer';
 import { StoryThemeToggle } from '@src/stories/components/StoryThemeToggle';
 import type { Meta, StoryObj } from '@storybook/react';
@@ -79,6 +80,36 @@ const Demo = () => {
           }
         >
           Show Toast
+        </Button>
+        <Button
+          variant='secondary'
+          onClick={() =>
+            addToast({
+              children: `Manual close toast! (${position})`,
+              title: 'Manual Toast',
+              autoClose: false,
+              duration: 3000,
+              position:
+                position as import('@src/models/global/global.model').Position,
+            })
+          }
+        >
+          Show Toast (Manual Close)
+        </Button>
+        <Button
+          variant='info'
+          onClick={() =>
+            addToast({
+              children: `Toast with icon! (${position})`,
+              title: 'Icon Toast',
+              icon: <InfoIcon style={{ marginRight: 8 }} />,
+              duration: 3000,
+              position:
+                position as import('@src/models/global/global.model').Position,
+            })
+          }
+        >
+          Show Toast (With Icon)
         </Button>
       </div>
       <div style={{ marginTop: 24 }}>

@@ -48,8 +48,6 @@ export const ToastItem: FC<ToastItemProps> = ({
   const [remainingTime, setRemainingTime] = useState(duration);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Removed default icon logic. Only use provided icon.
-
   useEffect(() => {
     if (!autoClose) return;
     const updateRangeInMilliseconds = 10;
