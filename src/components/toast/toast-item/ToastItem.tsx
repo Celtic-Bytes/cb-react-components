@@ -86,9 +86,13 @@ export const ToastItem: FC<ToastItemProps> = ({
     <div
       {...props}
       id={id ?? generatedId.current}
-      className={`${baseClassName} ${
-        visible ? 'cb-toast-item--visible' : 'cb-toast-item--hidden'
-      }`}
+      className={[
+        baseClassName,
+        `${visible ? 'cb-toast-item--visible' : 'cb-toast-item--hidden'}`,
+        props.className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
       aria-hidden={!visible}
     >
       <div className='cb-toast-item__main'>
