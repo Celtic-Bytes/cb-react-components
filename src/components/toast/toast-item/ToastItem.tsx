@@ -7,20 +7,14 @@ import './ToastItem.css';
 
 const baseClassName = 'cb-toast-item';
 
-/**
- * To pass the message use the 'children' prop or use composition.
- */
-/**
- * To pass the message use the 'children' prop or use composition.
- *
- * autoClose: If true, toast will close automatically after duration. If false, stays until manually closed.
- */
 export const ToastItem: FC<ToastItemProps> = ({
+  /** To pass the message use the 'children' prop or use composition. */
   children,
-  duration = 3000,
+  duration = 4000,
   icon,
   id,
   onClose,
+  /** autoClose: If true, toast will close automatically after duration. If false, stays until manually closed. */
   autoClose = true,
   title,
   ...props
@@ -123,7 +117,6 @@ export const ToastItem: FC<ToastItemProps> = ({
         <Progress
           duration={duration}
           type='timer'
-          autoStart={false}
         />
       )}
     </div>
