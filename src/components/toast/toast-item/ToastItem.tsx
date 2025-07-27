@@ -89,11 +89,10 @@ export const ToastItem: FC<ToastItemProps> = ({
       <div className='cb-toast-item__main'>
         {icon && <div className={'cb-toast-item__icon'}>{icon}</div>}
         <div className='cb-toast-item__content-area'>
-          {/* Optional wrapper for title/content */}
           {title && <div className={'cb-toast-item__title'}>{title}</div>}
           <div className={'cb-toast-item__content'}>{children}</div>
         </div>
-        {/* Render close button only if autoClose is false */}
+
         {!autoClose && (
           <button
             onClick={() => {
@@ -110,7 +109,6 @@ export const ToastItem: FC<ToastItemProps> = ({
         )}
       </div>
 
-      {/* Render progress bar only if autoClose is true and duration > 0 */}
       {autoClose && duration > 0 && (
         <Progress
           duration={duration}

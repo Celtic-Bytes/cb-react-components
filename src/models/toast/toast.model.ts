@@ -14,9 +14,7 @@ export interface ToastContextValue {
 }
 
 export interface ToastProviderProps {
-  autoClose?: boolean;
   children: ReactNode;
-  duration?: number;
   id?: string;
 }
 
