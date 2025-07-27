@@ -19,7 +19,7 @@ export const ToastItem: FC<ToastItemProps> = ({
   icon,
   id,
   onClose,
-  persistant,
+  persistent,
   showIcon = true,
   showProgressBar,
   title,
@@ -39,7 +39,7 @@ export const ToastItem: FC<ToastItemProps> = ({
 
   // Disappear animation before unmount (auto-close)
   useEffect(() => {
-    if (!persistant && duration > 0 && !showProgressBar) {
+    if (!persistent && duration > 0 && !showProgressBar) {
       const timeout = setTimeout(() => {
         setVisible(false);
         // Wait for animation before calling onClose
@@ -49,7 +49,7 @@ export const ToastItem: FC<ToastItemProps> = ({
       }, duration);
       return () => clearTimeout(timeout);
     }
-  }, [persistant, duration, showProgressBar, onClose, id]);
+  }, [persistent, duration, showProgressBar, onClose, id]);
 
   // progress bar
   const [remainingTime, setRemainingTime] = useState(duration);
@@ -58,7 +58,7 @@ export const ToastItem: FC<ToastItemProps> = ({
   const variantIcon = getVariantIcon(variant);
 
   useEffect(() => {
-    if (persistant || !showProgressBar) return;
+    if (persistent || !showProgressBar) return;
     const updateRangeInMilliseconds = 10;
 
     if (remainingTime > 0 && !timerRef.current) {
@@ -80,7 +80,7 @@ export const ToastItem: FC<ToastItemProps> = ({
         timerRef.current = null;
       }
     };
-  }, [persistant, showProgressBar, duration, remainingTime]);
+  }, [persistent, showProgressBar, duration, remainingTime]);
 
   return (
     <div
@@ -101,7 +101,7 @@ export const ToastItem: FC<ToastItemProps> = ({
           <div className={'cb-toast-item__content'}>{children}</div>
         </div>
         {/* Render close button if persistent or if onClose provided */}
-        {(persistant || onClose) && (
+        {(persistent || onClose) && (
           <button
             onClick={() => {
               setVisible(false);
@@ -118,7 +118,7 @@ export const ToastItem: FC<ToastItemProps> = ({
       </div>
 
       {/* Render progress bar only if enabled and not persistent */}
-      {!persistant && showProgressBar && duration > 0 && (
+      {!persistent && showProgressBar && duration > 0 && (
         <div className={''}>
           <progress
             value={remainingTime}

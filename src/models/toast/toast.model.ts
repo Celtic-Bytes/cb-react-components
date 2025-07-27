@@ -14,7 +14,7 @@ export interface Toast {
   id: string;
   message: string;
   onClose?: (id: string) => void;
-  persistant?: boolean;
+  persistent?: boolean;
   position?: Position;
   showIcon?: boolean;
   showProgressBar?: boolean;
@@ -37,7 +37,7 @@ export interface ToastItemProps extends HTMLAttributes<HTMLDivElement> {
   icon?: ReactNode;
   id?: string;
   onClose?: (id: string) => void;
-  persistant?: boolean;
+  persistent?: boolean;
   showIcon?: boolean;
   showProgressBar?: boolean;
   size?: Sizes;

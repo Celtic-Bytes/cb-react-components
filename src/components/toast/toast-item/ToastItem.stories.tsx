@@ -20,7 +20,7 @@ const meta: Meta<typeof ToastItem> = {
       control: 'select',
       options: Object.values(BackgroundVariantList),
     },
-    persistant: {
+    persistent: {
       control: 'boolean',
     },
     showIcon: {
@@ -45,7 +45,7 @@ const meta: Meta<typeof ToastItem> = {
   args: {
     backgroundVariant: BackgroundVariantList.solid,
     children: 'Hello world',
-    persistant: false,
+    persistent: false,
     showIcon: true,
     showProgressBar: true,
     size: SizesList.medium,
