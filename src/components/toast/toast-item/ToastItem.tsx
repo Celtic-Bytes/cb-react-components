@@ -1,10 +1,8 @@
-import {
-  BackgroundVariantList,
-  VariantList,
-} from '@src/models/global/global.model';
+import { VariantList } from '@src/models/global/global.model';
 import { ToastItemProps } from '@src/models/toast/toast.model';
 import { getVariantIcon } from '@src/utils/icon-utils';
 import { FC, useEffect, useId, useRef, useState } from 'react';
+import './ToastItem.css';
 
 const baseClassName = 'cb-toast-item';
 
@@ -16,7 +14,6 @@ const baseClassName = 'cb-toast-item';
  * To pass the message use the 'children' prop or use composition.
  */
 export const ToastItem: FC<ToastItemProps> = ({
-  backgroundVariant = BackgroundVariantList.solid,
   children,
   duration = 3000,
   icon,
@@ -25,12 +22,34 @@ export const ToastItem: FC<ToastItemProps> = ({
   persistant,
   showIcon = true,
   showProgressBar,
-  size,
   title,
   variant = VariantList.default,
   ...props
 }) => {
   const generatedId = useRef(`cb-toast-item-${useId()}`);
+
+  // Animation state
+  const [visible, setVisible] = useState(false);
+
+  // Appear animation on mount
+  useEffect(() => {
+    setVisible(true);
+    return () => {};
+  }, []);
+
+  // Disappear animation before unmount (auto-close)
+  useEffect(() => {
+    if (!persistant && duration > 0 && !showProgressBar) {
+      const timeout = setTimeout(() => {
+        setVisible(false);
+        // Wait for animation before calling onClose
+        setTimeout(() => {
+          onClose?.(id ?? generatedId.current);
+        }, 300); // match CSS duration
+      }, duration);
+      return () => clearTimeout(timeout);
+    }
+  }, [persistant, duration, showProgressBar, onClose, id]);
 
   // progress bar
   const [remainingTime, setRemainingTime] = useState(duration);
@@ -67,14 +86,16 @@ export const ToastItem: FC<ToastItemProps> = ({
     <div
       {...props}
       id={id ?? generatedId.current}
-      className={baseClassName}
+      className={`${baseClassName} ${
+        visible ? 'cb-toast-item--visible' : 'cb-toast-item--hidden'
+      }`}
+      aria-hidden={!visible}
     >
       <div className='cb-toast-item__main'>
         {showIcon && (
           <div className={'cb-toast-item__icon'}>{icon || variantIcon}</div>
         )}
         <div className='cb-toast-item__content-area'>
-          {' '}
           {/* Optional wrapper for title/content */}
           {title && <div className={'cb-toast-item__title'}>{title}</div>}
           <div className={'cb-toast-item__content'}>{children}</div>
@@ -82,11 +103,16 @@ export const ToastItem: FC<ToastItemProps> = ({
         {/* Render close button if persistent or if onClose provided */}
         {(persistant || onClose) && (
           <button
-            onClick={() => {}}
-            className={'cb-toast-item__action'} // Use a button for accessibility
+            onClick={() => {
+              setVisible(false);
+              setTimeout(() => {
+                onClose?.(id ?? generatedId.current);
+              }, 300);
+            }}
+            className={'cb-toast-item__action'}
             aria-label='Close toast'
           >
-            &times; {/* Standard close icon */}
+            &times;
           </button>
         )}
       </div>
