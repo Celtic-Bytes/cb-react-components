@@ -7,25 +7,11 @@ import {
 } from '@src/models/global/global.model';
 import { HTMLAttributes, ReactNode } from 'react';
 
-export interface Toast {
-  backgroundVariant?: BackgroundVariant;
-  duration?: number;
-  icon?: React.ReactNode;
-  id: string;
-  message: string;
-  onClose?: (id: string) => void;
-  persistent?: boolean;
-  position?: Position;
-  showIcon?: boolean;
-  showProgressBar?: boolean;
-  size?: Sizes;
-  title?: string;
-  variant?: Variant;
-}
+// Unified ToastItemProps is now the main toast interface
 
 export interface ToastContextValue {
-  toasts: Toast[];
-  addToast: (toast: Omit<Toast, 'id'>) => string;
+  toasts: ToastItemProps[];
+  addToast: (toast: Omit<ToastItemProps, 'id'>) => string;
   removeToast: (id: string) => void;
   clearToasts: () => void;
 }
@@ -36,6 +22,8 @@ export interface ToastItemProps extends HTMLAttributes<HTMLDivElement> {
   duration?: number;
   icon?: ReactNode;
   id?: string;
+  message?: string; // Added from Toast
+  position?: Position; // Added from Toast
   onClose?: (id: string) => void;
   persistent?: boolean;
   showIcon?: boolean;
