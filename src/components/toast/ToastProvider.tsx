@@ -11,7 +11,12 @@ import ReactDOM from 'react-dom';
 import { ToastContext } from './ToastContext';
 import { ToastItem } from './toast-item/ToastItem';
 
-export const ToastProvider: FC<ToastProviderProps> = ({ children, id }) => {
+export const ToastProvider: FC<ToastProviderProps> = ({
+  children,
+  id,
+  autoClose = true,
+  duration = 3000,
+}) => {
   const MAX_TOASTS_PER_GROUP = 5;
   const [toasts, setToasts] = useState<ToastItemProps[]>([]);
 

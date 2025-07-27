@@ -8,10 +8,6 @@ import './ToastItem.css';
 const baseClassName = 'cb-toast-item';
 
 /**
- * To pass the message use the 'children' prop.
- */
-
-/**
  * To pass the message use the 'children' prop or use composition.
  */
 export const ToastItem: FC<ToastItemProps> = ({
