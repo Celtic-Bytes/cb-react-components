@@ -1,7 +1,6 @@
 import {
   BackgroundVariantList,
   SizesList,
-  VariantList,
 } from '@src/models/global/global.model';
 import { StoryContainer } from '@src/stories/components/StoryContainer';
 import { StoryToolsContainer } from '@src/stories/components/StoryToolsContainer';
@@ -23,21 +22,14 @@ const meta: Meta<typeof ToastItem> = {
     autoClose: {
       control: 'boolean',
     },
-    showIcon: {
-      control: 'boolean',
-    },
-    showProgressBar: {
-      control: 'boolean',
-    },
+    // ...existing code...
+    // ...existing code...
     size: {
       control: 'select',
       options: Object.values(SizesList),
     },
     title: { control: 'text' },
-    variant: {
-      control: 'select',
-      options: Object.values(VariantList),
-    },
+    // ...existing code...
   },
   parameters: {
     layout: 'centered',
@@ -46,11 +38,9 @@ const meta: Meta<typeof ToastItem> = {
     backgroundVariant: BackgroundVariantList.solid,
     children: 'Hello world',
     autoClose: true,
-    showIcon: true,
-    showProgressBar: true,
+    // ...existing code...
     size: SizesList.medium,
     title: 'Title',
-    variant: VariantList.default,
   },
   decorators: [
     (Story, context) => {

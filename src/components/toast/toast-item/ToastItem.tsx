@@ -1,7 +1,7 @@
 import { Progress } from '@src/components/progress/Progress';
-import { VariantList } from '@src/models/global/global.model';
+// ...existing code...
 import { ToastItemProps } from '@src/models/toast/toast.model';
-import { getVariantIcon } from '@src/utils/icon-utils';
+// ...existing code...
 import { FC, useEffect, useId, useRef, useState } from 'react';
 import './ToastItem.css';
 
@@ -22,10 +22,7 @@ export const ToastItem: FC<ToastItemProps> = ({
   id,
   onClose,
   autoClose = true,
-  showIcon = true,
-  showProgressBar,
   title,
-  variant = VariantList.default,
   ...props
 }) => {
   const generatedId = useRef(`cb-toast-item-${useId()}`);
@@ -41,7 +38,7 @@ export const ToastItem: FC<ToastItemProps> = ({
 
   // Disappear animation before unmount (auto-close)
   useEffect(() => {
-    if (autoClose && duration > 0 && !showProgressBar) {
+    if (autoClose && duration > 0) {
       const timeout = setTimeout(() => {
         setVisible(false);
         // Wait for animation before calling onClose
@@ -51,16 +48,16 @@ export const ToastItem: FC<ToastItemProps> = ({
       }, duration);
       return () => clearTimeout(timeout);
     }
-  }, [autoClose, duration, showProgressBar, onClose, id]);
+  }, [autoClose, duration, onClose, id]);
 
   // progress bar
   const [remainingTime, setRemainingTime] = useState(duration);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const variantIcon = getVariantIcon(variant);
+  // Removed default icon logic. Only use provided icon.
 
   useEffect(() => {
-    if (!autoClose || !showProgressBar) return;
+    if (!autoClose) return;
     const updateRangeInMilliseconds = 10;
 
     if (remainingTime > 0 && !timerRef.current) {
@@ -82,7 +79,7 @@ export const ToastItem: FC<ToastItemProps> = ({
         timerRef.current = null;
       }
     };
-  }, [autoClose, showProgressBar, duration, remainingTime]);
+  }, [autoClose, duration, remainingTime]);
 
   return (
     <div
@@ -98,16 +95,14 @@ export const ToastItem: FC<ToastItemProps> = ({
       aria-hidden={!visible}
     >
       <div className='cb-toast-item__main'>
-        {showIcon && (
-          <div className={'cb-toast-item__icon'}>{icon || variantIcon}</div>
-        )}
+        {icon && <div className={'cb-toast-item__icon'}>{icon}</div>}
         <div className='cb-toast-item__content-area'>
           {/* Optional wrapper for title/content */}
           {title && <div className={'cb-toast-item__title'}>{title}</div>}
           <div className={'cb-toast-item__content'}>{children}</div>
         </div>
-        {/* Render close button if not autoClose or if onClose provided */}
-        {(!autoClose || onClose) && (
+        {/* Render close button only if autoClose is false */}
+        {!autoClose && (
           <button
             onClick={() => {
               setVisible(false);
@@ -123,10 +118,10 @@ export const ToastItem: FC<ToastItemProps> = ({
         )}
       </div>
 
-      {/* Render progress bar only if enabled and autoClose */}
-      {autoClose && showProgressBar && duration > 0 && (
+      {/* Render progress bar only if autoClose is true and duration > 0 */}
+      {autoClose && duration > 0 && (
         <Progress
-          duration={3000}
+          duration={duration}
           type='timer'
           autoStart={false}
         />

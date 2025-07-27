@@ -14,8 +14,7 @@ import { ToastItem } from './toast-item/ToastItem';
 export const ToastProvider: FC<ToastProviderProps> = ({
   children,
   id,
-  autoClose = true,
-  duration = 3000,
+  // ...existing code...
 }) => {
   const MAX_TOASTS_PER_GROUP = 5;
   const [toasts, setToasts] = useState<ToastItemProps[]>([]);
@@ -166,7 +165,7 @@ export const ToastProvider: FC<ToastProviderProps> = ({
             {...toast}
             onClose={toast.onClose ?? removeToast}
           >
-            {toast.message}
+            {toast.children}
           </ToastItem>
         ))}
       </div>

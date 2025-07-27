@@ -70,11 +70,8 @@ const Demo = () => {
           variant='primary'
           onClick={() =>
             addToast({
-              message: `Hello from Toast! (${position})`,
+              children: `Hello from Toast! (${position})`,
               title: 'Toast Title',
-              variant: 'success',
-              showIcon: true,
-              showProgressBar: true,
               duration: 3000,
               position:
                 position as import('@src/models/global/global.model').Position,

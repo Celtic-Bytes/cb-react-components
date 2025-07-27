@@ -3,7 +3,6 @@ import {
   BackgroundVariant,
   Position,
   Sizes,
-  Variant,
 } from '@src/models/global/global.model';
 import { HTMLAttributes, ReactNode } from 'react';
 
@@ -36,16 +35,12 @@ export interface ToastItemProps extends HTMLAttributes<HTMLDivElement> {
   duration?: number;
   icon?: ReactNode;
   id?: string;
-  message?: string;
   onClose?: (id: string) => void;
   /**
    * If true, toast will close automatically after duration. If false, stays until manually closed.
    */
   autoClose?: boolean;
   position?: Position;
-  showIcon?: boolean;
-  showProgressBar?: boolean;
   size?: Sizes;
   title?: string;
-  variant?: Variant;
 }
