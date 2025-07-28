@@ -15,47 +15,19 @@ const meta: Meta<typeof ThemeProvider> = {
     docs: {
       description: {
         component: `
-The \`ThemeProvider\` component is used to provide theming capabilities to your application. It allows you to define a set of themes and dynamically switch between them.
+The ThemeProvider component is used to provide theming capabilities to your application. It allows you to define a set of themes and dynamically switch between them.
 
-### Usage
-1. Import the \`ThemeProvider\` component:
-   \`\`\`tsx
-   import { ThemeProvider } from './ThemeProvider';
-   \`\`\`
+Usage:
+1. Import the ThemeProvider component from './ThemeProvider'.
+2. Wrap your application or specific components with ThemeProvider and pass your themes as a prop.
+3. Use the useTheme hook to access the current theme and switch themes dynamically.
 
-2. Wrap your application or specific components with \`ThemeProvider\`:
-   \`\`\`tsx
-   <ThemeProvider themes={[darkDefaultTheme, lightDefaultTheme]}>
-     <YourComponent />
-   </ThemeProvider>
-   \`\`\`
+Props:
+- themes (optional): An array of Theme objects. If not provided, default themes (darkDefaultTheme and lightDefaultTheme) will be used.
+- children: The content to be wrapped by the ThemeProvider.
 
-3. Use the \`useTheme\` hook to access the current theme and switch themes dynamically:
-   \`\`\`tsx
-   import { useTheme } from './useTheme';
-
-   const { switchThemeByIndex, currentThemeIndex } = useTheme();
-
-   const toggleTheme = () => {
-     const newThemeIndex = currentThemeIndex === 0 ? 1 : 0;
-     switchThemeByIndex(newThemeIndex);
-   };
-   \`\`\`
-
-### Props
-- \`themes\` (optional): An array of \`Theme\` objects. If not provided, default themes (\`darkDefaultTheme\` and \`lightDefaultTheme\`) will be used.
-- \`children\`: The content to be wrapped by the \`ThemeProvider\`.
-
-### Example
-\`\`\`tsx
-import { ThemeProvider, darkDefaultTheme, lightDefaultTheme } from './ThemeProvider';
-
-<ThemeProvider themes={[darkDefaultTheme, lightDefaultTheme]}>
-  <div>
-    <p>This content is themed!</p>
-  </div>
-</ThemeProvider>
-\`\`\`
+Example:
+Wrap your content with ThemeProvider and pass your themes to enable theming.
         `,
       },
     },

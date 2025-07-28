@@ -160,3 +160,22 @@ export default tseslint.config({
   },
 });
 ```
+
+## Known issues
+
+### The current testing environment is not configured to support act(...)
+
+This is a known [issue](https://github.com/storybookjs/storybook/issues/30356) from Storybook.
+
+### Hydration error: <pre> cannot be a descendant of <p>
+
+You may see a warning in the browser console like:
+
+```
+In HTML, <pre> cannot be a descendant of <p>.
+This will cause a hydration error.
+```
+
+This is caused by Storybook's automatic Markdown rendering in the DocsPage, where code blocks or syntax highlighting may be placed inside a paragraph (`<p>`), violating HTML nesting rules. This is not directly caused by your component code, but by how Storybook renders documentation and code examples. It is safe to ignore unless it affects your actual component rendering.
+
+**Workaround:** If you see this error, review your Storybook documentation fields (especially `description.component`) and avoid placing code blocks or Markdown inside paragraphs. Prefer using code blocks for examples and keep inline code references minimal.

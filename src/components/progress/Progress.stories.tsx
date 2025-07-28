@@ -1,10 +1,13 @@
-import { ProgressTypesList } from '@src/models/progress/progress.model';
+import {
+  ProgressTimerProps,
+  ProgressTypesList,
+} from '@src/models/progress/progress.model';
 import { StoryContainer } from '@src/stories/components/StoryContainer';
 import { StoryToolsContainer } from '@src/stories/components/StoryToolsContainer';
 import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useCallback, useEffect, useState } from 'react';
-import { Progress, ProgressTimerProps } from './Progress';
+import { Progress } from './Progress';
 
 const meta: Meta<typeof Progress> = {
   title: 'components/Progress',
