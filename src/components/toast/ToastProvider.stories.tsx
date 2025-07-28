@@ -56,7 +56,6 @@ function App() {
 };
 export default meta;
 
-
 type Story = StoryObj<typeof ToastProvider>;
 
 const positions = [
@@ -85,7 +84,12 @@ const AutoCloseDemo = () => {
           onChange={(e) => setPosition(e.target.value)}
         >
           {positions.map((pos) => (
-            <option key={pos} value={pos}>{pos}</option>
+            <option
+              key={pos}
+              value={pos}
+            >
+              {pos}
+            </option>
           ))}
         </select>
         <Button
@@ -96,7 +100,8 @@ const AutoCloseDemo = () => {
               title: 'AutoClose',
               duration: 3000,
               autoClose: true,
-              position: position as import('@src/models/global/global.model').Position,
+              position:
+                position as import('@src/models/global/global.model').Position,
             })
           }
         >
@@ -117,10 +122,10 @@ export const AutoClose: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Shows a toast that closes automatically after a set duration.'
-      }
-    }
-  }
+        story: 'Shows a toast that closes automatically after a set duration.',
+      },
+    },
+  },
 };
 
 const ManualCloseDemo = () => {
@@ -137,7 +142,12 @@ const ManualCloseDemo = () => {
           onChange={(e) => setPosition(e.target.value)}
         >
           {positions.map((pos) => (
-            <option key={pos} value={pos}>{pos}</option>
+            <option
+              key={pos}
+              value={pos}
+            >
+              {pos}
+            </option>
           ))}
         </select>
         <Button
@@ -148,7 +158,8 @@ const ManualCloseDemo = () => {
               title: 'Manual Close',
               autoClose: false,
               duration: 3000,
-              position: position as import('@src/models/global/global.model').Position,
+              position:
+                position as import('@src/models/global/global.model').Position,
             })
           }
         >
@@ -169,10 +180,10 @@ export const ManualClose: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Shows a toast that must be closed manually by the user.'
-      }
-    }
-  }
+        story: 'Shows a toast that must be closed manually by the user.',
+      },
+    },
+  },
 };
 
 const IconDemo = () => {
@@ -189,7 +200,12 @@ const IconDemo = () => {
           onChange={(e) => setPosition(e.target.value)}
         >
           {positions.map((pos) => (
-            <option key={pos} value={pos}>{pos}</option>
+            <option
+              key={pos}
+              value={pos}
+            >
+              {pos}
+            </option>
           ))}
         </select>
         <Button
@@ -200,7 +216,8 @@ const IconDemo = () => {
               title: 'Icon Toast',
               icon: <InfoIcon style={{ marginRight: 8 }} />,
               duration: 3000,
-              position: position as import('@src/models/global/global.model').Position,
+              position:
+                position as import('@src/models/global/global.model').Position,
             })
           }
         >
@@ -221,10 +238,10 @@ export const WithIcon: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Shows a toast with an icon.'
-      }
-    }
-  }
+        story: 'Shows a toast with an icon.',
+      },
+    },
+  },
 };
 
 // General demo (all-in-one)
@@ -242,7 +259,12 @@ const Demo = () => {
           onChange={(e) => setPosition(e.target.value)}
         >
           {positions.map((pos) => (
-            <option key={pos} value={pos}>{pos}</option>
+            <option
+              key={pos}
+              value={pos}
+            >
+              {pos}
+            </option>
           ))}
         </select>
         <Button
@@ -252,7 +274,8 @@ const Demo = () => {
               children: `Hello from Toast! (${position})`,
               title: 'Toast Title',
               duration: 3000,
-              position: position as import('@src/models/global/global.model').Position,
+              position:
+                position as import('@src/models/global/global.model').Position,
             })
           }
         >
@@ -266,7 +289,8 @@ const Demo = () => {
               title: 'Manual Toast',
               autoClose: false,
               duration: 3000,
-              position: position as import('@src/models/global/global.model').Position,
+              position:
+                position as import('@src/models/global/global.model').Position,
             })
           }
         >
@@ -280,7 +304,8 @@ const Demo = () => {
               title: 'Icon Toast',
               icon: <InfoIcon style={{ marginRight: 8 }} />,
               duration: 3000,
-              position: position as import('@src/models/global/global.model').Position,
+              position:
+                position as import('@src/models/global/global.model').Position,
             })
           }
         >
@@ -289,7 +314,8 @@ const Demo = () => {
       </div>
       <div style={{ marginTop: 24 }}>
         <p>
-          Select a position and click the button to show a toast. Use the theme toggle to switch modes.
+          Select a position and click the button to show a toast. Use the theme
+          toggle to switch modes.
         </p>
       </div>
     </StoryContainer>
@@ -306,8 +332,8 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'General demo showing all toast features together.'
-      }
-    }
-  }
+        story: 'General demo showing all toast features together.',
+      },
+    },
+  },
 };
