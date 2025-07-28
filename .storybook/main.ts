@@ -16,6 +16,6 @@ const config: StorybookConfig = {
   // TODO: Modify the icon to something mine
   managerHead: (head) =>
     `${head}
-      <link rel="shortcut icon" href="../public/favicon.png" type="image/ico">`,
+      <link rel="shortcut icon" href="/favicon.png" type="image/ico">`,
 };
 export default config;
