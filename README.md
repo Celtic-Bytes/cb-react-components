@@ -36,25 +36,52 @@ React-toastify:
 
 - https://github.com/fkhadra/react-toastify
 
-## Storybook Usage & Documentation Warning
+## Getting Started
+
+To work in this project:
+
+1. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+2. **Start Storybook for development:**
+   ```sh
+   npm run storybook
+   ```
+   - Opens Storybook at [http://localhost:6006](http://localhost:6006).
+3. **Build the library:**
+   ```sh
+   npm run build
+   ```
+4. **Lint the code:**
+   ```sh
+   npm run lint
+   ```
+5. **Debugging:**
+   - Use the VS Code launch configuration named "Storybook" (see `.vscode/launch.json`).
+   - Set breakpoints in your components and start the debugger.
+
+**Note:** This project is experimental and not recommended for production use.
+
+This project is a free component library for React. I didn't like the current libraries on the market. I wanted something simple, customizable, and without Tailwind. So I decided to create my own component library. This library is experimental and shouldn't be used for production.
+
+## Debug
+
+To debug your components just add a breakpoint in your component and run the pre-configured `launch.json` setting.
+
+## Documentation
 
 This project uses [Storybook](https://storybook.js.org/) for component development and documentation.
 
 ### How to Launch Storybook
 
-- Run `npm install` to install dependencies.
-- Start Storybook with:
+Start Storybook with:
 
 ```sh
 npm run storybook
 ```
 
 Storybook will launch at [http://localhost:6006](http://localhost:6006).
-
-### Debugging
-
-- Use the included VS Code launch configuration (`.vscode/launch.json`) to debug with Chrome.
-- Set breakpoints in your components and start the "Storybook" debug configuration.
 
 ### Important: Documentation Description Issue
 
@@ -88,67 +115,7 @@ description: {
 
 If you need to show code, use a code block for full examples, but keep inline references to component names as plain text.
 
----
-
-## Getting Started & Debugging
-
-To work in this project:
-
-1. **Install dependencies:**
-   ```sh
-   npm install
-   ```
-2. **Start Storybook for development:**
-   ```sh
-   npm run storybook
-   ```
-   - Opens Storybook at [http://localhost:6006](http://localhost:6006).
-3. **Build the library:**
-   ```sh
-   npm run build
-   ```
-4. **Lint the code:**
-   ```sh
-   npm run lint
-   ```
-5. **Debugging:**
-   - Use the VS Code launch configuration named "Storybook" (see `.vscode/launch.json`).
-   - Set breakpoints in your components and start the debugger.
-
-**Note:** This project is experimental and not recommended for production use.
-
-This project is a free component library for React. I didn't like the current libraries on the market. I wanted something simple, customizable, and without Tailwind. So I decided to create my own component library. This library is experimental and shouldn't be used for production.
-
-## Debug
-
-To debug your components just add a breakpoint in your component and run the pre-configured `launch.json` setting. Or add the following configuration:
-
-```json
-{
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "chrome",
-      "request": "launch",
-      "name": "Storybook",
-      "url": "http://localhost:6006",
-      "webRoot": "${workspaceFolder}",
-      "preLaunchTask": "start-storybook"
-    }
-  ]
-}
-```
-
-## React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-### Expanding the ESLint configuration
+## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
