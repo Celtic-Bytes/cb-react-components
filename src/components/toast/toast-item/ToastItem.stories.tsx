@@ -64,8 +64,16 @@ const meta: Meta<typeof ToastItem> = {
 export default meta;
 type Story = StoryObj<typeof ToastItem>;
 
-export const Primary: Story = {
+export const ManualClose: Story = {
   args: {
     children: 'Hello world',
+    autoClose: false,
+  },
+};
+
+export const AutoClose: Story = {
+  args: {
+    children: 'Hello world',
+    autoClose: true,
   },
 };
